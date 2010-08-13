@@ -17,4 +17,4 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-int min(char board[][], char max_player, char min_player, int depth);
+int max(char board[][], char max_player, char min_player, int depth);

@@ -23,8 +23,8 @@
 /* Set the stone for the player if the choosen field is empty */
 int set_stone(char board[][], char stone, int x, int y)
 {
-     if (field[x][y] == ' ') {
-        field[x][y] = stone;
+     if (board[x][y] == ' ') {
+        board[x][y] = stone;
         return TRUE;
      } else {
         return FALSE;
@@ -36,7 +36,7 @@ char player_next(char currnt_player)
 {
      char next;
 
-     if (current_player == PLAYER1) {
+     if (currnt_player == PLAYER1) {
         next = PLAYER2;
      } else {
         next = PLAYER1;
@@ -48,50 +48,49 @@ char player_next(char currnt_player)
 void computer_player2(char board[][], char current, int round)
 {
      max(board, PLAYER1, PLAYER2, round);
-     set_stone(board, current, x_next, y_next);
+     set_stone(board, current, xnext, ynext);
 }
 
 /* Search for a winner */
 char game_winner(char board[][], char currnt_player)
 {
-        /* Row */
-        for (int x = 0; x < 3; ++x) {
-           for (int i = 0; i < 3; ++i) {
-              if (field[x][i] != currnt_player) {
-                 break;
-              } else if (i == 2) {
-           	      return currnt_player;
-              }
-           }
-        }
-
-        /* Collumn */
-        for (int y = 0; y < 3; ++y) {
-           for (int i = 0; i < 3; ++i){
-              if (field[i][y] != currnt_player) {
-                 break;
-              } else if (i == 2) {
-                 return currnt_player;
-              }
-           }
-        }
-
-        /* Diagonal */
+     /* Row */
+     for (int x = 0; x < 3; ++x) {
         for (int i = 0; i < 3; ++i) {
-           if (field[i][i] != currnt_player) {
+           if (board[x][i] != currnt_player) {
+              break;
+           } else if (i == 2) {
+      	      return currnt_player;
+           }
+        }
+     }
+
+     /* Collumn */
+     for (int y = 0; y < 3; ++y) {
+        for (int i = 0; i < 3; ++i){
+           if (board[i][y] != currnt_player) {
               break;
            } else if (i == 2) {
               return currnt_player;
            }
         }
+     }
 
-        /* Anti-Diagonal */
-        for (int i = 0; i < 3; ++i) {
-           if (field[i][2 - i] != currnt_player) {
-              break;
-           } else if (i == 2) {
-              return currnt_player;
-           }
+     /* Diagonal */
+     for (int i = 0; i < 3; ++i) {
+        if (board[i][i] != currnt_player) {
+           break;
+        } else if (i == 2) {
+           return currnt_player;
+        }
+     }
+
+     /* Anti-Diagonal */
+     for (int i = 0; i < 3; ++i) {
+        if (board[i][2 - i] != currnt_player) {
+           break;
+        } else if (i == 2) {
+           return currnt_player;
         }
      }
      return NONE;

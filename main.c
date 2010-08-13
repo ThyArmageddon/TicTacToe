@@ -45,7 +45,7 @@ int main(void)
      /* Game board */
      char board[NUM_ROWS][NUM_COLS];
 
-     /* Initialize the game field */
+     /* Initialize the game */
      for (int i = 0; i < NUM_ROWS; ++i) {
         for (int j = 0; j < NUM_COLS; ++j) {
            board[i][j] = ' ';
