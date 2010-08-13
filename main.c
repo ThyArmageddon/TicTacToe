@@ -18,63 +18,77 @@
 
  * This runs the game's mechanism
  */
+#include <stdio.h>
 #include "include/libttt.h"
 
-void main(void)
+int main(void)
 {
 
-     int c;
+     /* X & Y cell positions */
      int x, y;
-     int valid_input = TRUE;
-     int round = 0;                              // Played rounds
-     char player1 = 'X';                         // 1st player's symbol
-     char player2 = 'O';                         // 2nd player's symbol
-     char currnt_player = player1;              // 1st player starts always
-     char game_field[NUM_ROWS][NUM_COLS];        // Play field
 
-     /**
-      * Initialize the game field
-      */
+     /* Syntax correctness */
+     int valid_input = TRUE;
+
+     /* Rounds played sofar */
+     int round = 0;
+
+     /* Game is played */
+     char game_over = FALSE;
+
+     /* Winner is not decided at the game start */
+     char winner = NONE;
+
+     /* Player 1 always starts the game */
+     char currnt_player = PLAYER1;
+
+     /* Game board */
+     char board[NUM_ROWS][NUM_COLS];
+
+     /* Initialize the game field */
      for (int i = 0; i < NUM_ROWS; ++i) {
         for (int j = 0; j < NUM_COLS; ++j) {
-           game_field[i][j] = ' ';
+           board[i][j] = ' ';
         }
      }
 
-     //while (!game_ended(game_winner(game_field, player1, player2), round)) {
-     while () {
+     while (!game_over) {
 
-        simulate(game_field);
-
-        /**
-         * Read the human player's move
-         */
-        printf("Enter moves as \"<row> <col>\" (no quotes)\n");
-
-        do {
-              valid_input = TRUE;
-
-              printf("%c\'s move: ", player1);
-              fflush(stdout);
-              scanf("%d %d", &x, &y);
-              if ((x < 0 && x > NUM_ROWS) || (y < 0 && y > NUM_COLS)) {
-                 printf("Illegal move (off board), try again\n");
-                 valid_input = FALSE;
-              } else if (!set_stone(game_field, player1, round, x, y)) {
-                 printf("Illegal move (already taken), try again\n");
-                 valid_input = FALSE;
-              }
-        } while (valid_input == TRUE);
-
-        /**
-         * Compute the computer's best move
-         */
-        computer_player2(game_field, player1, player2, round);
+        simulate(board);
+        /* The human player should choose his best move */
+        if (currnt_player == PLAYER1) {
+           printf("Enter moves as \"<row> <col>\" (no quotes)\n");
+           do {
+                 valid_input = TRUE;
+                 printf("%c\'s move: ", PLAYER1);
+                 fflush(stdout);
+                 scanf("%d %d", &x, &y);
+                 if ((x > 0 && x < NUM_ROWS + 1) && (y > 0 && y < NUM_COLS + 1)) {
+                    if (!set_stone(board, currnt_player, (x - 1), (y - 1))) {
+                       printf("Illegal move (already taken), try again\n");
+                       valid_input = FALSE;
+                    }
+                 } else {
+                    printf("Illegal move (off board), try again\n");
+                    valid_input = FALSE;
+                 }
+           } while (valid_input == TRUE);
+           currnt_player = player_next(currnt_player);
+           game_over = game_ended(game_winner(board, currnt_player), round);
+           ++round;
+        } else {
+           /* Compute computer's best move */
+           computer_player2(board, currnt_player, round);
+           game_over = game_ended(game_winner(board, currnt_player), round);
+           ++round;
+        }
      }
 
-     if (game_winner(game_field, player1, player2) == player1) {
-        printf("TicTacToe! %c wins!\n", player1);
-     } else if (game_winner(game_field, player1, player2) == player2) {
+     winner = game_winner(board, currnt_player);
+     /* Show the end game results in a nice way */
+     if (winner == PLAYER) {
+        printf("TicTacToe! %c wins!\n", PLAYER1);
+     } else if (winner == player2) {
         printf("TicTacToe! %c wins!\n", player2);
      } else {
         printf("Stalemate... nobody winned :(\n");

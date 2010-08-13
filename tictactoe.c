@@ -18,10 +18,9 @@
  */
 #include <stdio.h>
 #include "include/libttt.h"
+#include "include/minimax.h"
 
-/**
- * Set the stone for the player if the choosen field is empty
- */
+/* Set the stone for the player if the choosen field is empty */
 int set_stone(char board[][], char stone, int x, int y)
 {
      if (field[x][y] == ' ') {
@@ -32,28 +31,24 @@ int set_stone(char board[][], char stone, int x, int y)
      }
 }
 
-/**
- * Switch players after each successfull round
- */
-char next_player(char currnt_player, char player1, char player2)
+/* Switch players after each successfull round */
+char player_next(char currnt_player)
 {
-     char next_player = ' ';
+     char next;
 
-     if (current_player == player1) {
-        next_player = player2;
+     if (current_player == PLAYER1) {
+        next = PLAYER2;
      } else {
-        next_player = player1;
+        next = PLAYER1;
      }
-     return next_player;
+     return next;
 }
 
-/**
- * Computer player
- */
-void computer_player2(char board[][], char player, int round)
+/* Computer player */
+void computer_player2(char board[][], char current, int round)
 {
-     //max_value(board, player1, player2, round);
-     //set_stone(board, player2, x_next, y_next);
+     max(board, PLAYER1, PLAYER2, round);
+     set_stone(board, current, x_next, y_next);
 }
 
 /* Search for a winner */
@@ -102,21 +97,17 @@ char game_winner(char board[][], char currnt_player)
      return NONE;
 }
 
-/**
- * Return the game status
- */
+/* Return the game status */
 int game_ended(char winner, int round)
 {
      if (winner == NONE && round < 9) {
-        return TRUE;
-     } else {
         return FALSE;
+     } else {
+        return TRUE;
      }
 }
 
-/**
- * Draw the game board
- */
+/* Draw the game board */
 void simulate(char board[][])
 {
      for (int i = 0; i < NUM_ROWS; ++i) {

@@ -22,7 +22,7 @@
 
 #define MAX_DEPTH 8     // Max search depth
 
-int min(char board[][], char max_player, char min_player, int depth)
+int max(char board[][], char max_player, char min_player, int depth)
 {
      int alfa = INT_MIN;
      int node = 0;
@@ -39,8 +39,8 @@ int min(char board[][], char max_player, char min_player, int depth)
               if (depth > alfa) {
                  alfa = depth;
                  if (depth == rounds) {
-                    x_next = i;
-                    y_next = j;
+                    xnext = i;
+                    ynext = j;
                  }
               }
            }
