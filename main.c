@@ -86,10 +86,10 @@ int main(void)
 
      winner = game_winner(board, currnt_player);
      /* Show the end game results in a nice way */
-     if (winner == PLAYER) {
+     if (winner == PLAYER1) {
         printf("TicTacToe! %c wins!\n", PLAYER1);
-     } else if (winner == player2) {
-        printf("TicTacToe! %c wins!\n", player2);
+     } else if (winner == PLAYER2) {
+        printf("TicTacToe! %c wins!\n", PLAYER2);
      } else {
         printf("Stalemate... nobody winned :(\n");
      }
