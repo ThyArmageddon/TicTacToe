@@ -1,5 +1,6 @@
 /*
  * Tictactoe: or noughts and crosses, human vs. computer game.
+ * tictactoe.c: Game related functions
  *
  * Copyright (C) 2010 Dani Soufi <danisoufi@gmail.com>
  *
@@ -7,12 +8,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
-
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
-
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -20,8 +21,7 @@
 #include "include/libttt.h"
 #include "include/minimax.h"
 
-/* Set the stone for the player if the choosen field is empty */
-int set_stone(char board[][], char stone, int x, int y)
+int set_stone(char board[NUM_ROWS][NUM_COLS], char stone, int x, int y)
 {
      if (board[x][y] == ' ') {
         board[x][y] = stone;
@@ -31,7 +31,6 @@ int set_stone(char board[][], char stone, int x, int y)
      }
 }
 
-/* Switch players after each successfull round */
 char player_next(char currnt_player)
 {
      char next;
@@ -44,15 +43,12 @@ char player_next(char currnt_player)
      return next;
 }
 
-/* Computer player */
-void computer_player2(char board[][], char current, int round)
+void computer_player2(char board[NUM_ROWS][NUM_COLS], char current, int round)
 {
-     max(board, PLAYER1, PLAYER2, round);
-     set_stone(board, current, xnext, ynext);
+     max(board, PLAYER1, current, round);
 }
 
-/* Search for a winner */
-char game_winner(char board[][], char currnt_player)
+char game_winner(char board[NUM_ROWS][NUM_COLS], char currnt_player)
 {
      /* Row */
      for (int x = 0; x < 3; ++x) {
@@ -96,7 +92,6 @@ char game_winner(char board[][], char currnt_player)
      return NONE;
 }
 
-/* Return the game status */
 int game_ended(char winner, int round)
 {
      if (winner == NONE && round < 9) {
@@ -106,8 +101,7 @@ int game_ended(char winner, int round)
      }
 }
 
-/* Draw the game board */
-void simulate(char board[][])
+void simulate(char board[NUM_ROWS][NUM_COLS])
 {
      for (int i = 0; i < NUM_ROWS; ++i) {
         if (i > 0) {
