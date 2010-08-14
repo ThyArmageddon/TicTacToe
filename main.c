@@ -18,6 +18,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include <stdio.h>
+#include <unistd.h>
 #include "include/libttt.h"
 
 int main(void)
@@ -78,6 +79,7 @@ int main(void)
         } else {
            /* Compute computer's best move */
            computer_player2(board, currnt_player, round);
+           usleep(50000);
            game_over = game_ended(game_winner(board, currnt_player), round);
            ++round;
         }
