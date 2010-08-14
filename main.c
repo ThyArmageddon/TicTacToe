@@ -62,17 +62,18 @@ int main(void)
                  valid_input = TRUE;
                  printf("%c\'s move: ", PLAYER1);
                  fflush(stdout);
-                 scanf("%d %d", &x, &y);
-                 if ((x > 0 && x < NUM_ROWS + 1) && (y > 0 && y < NUM_COLS + 1)) {
-                    if (!set_stone(board, currnt_player, (x - 1), (y - 1))) {
-                       printf("Illegal move (already taken), try again\n");
+                 if (scanf("%d %d", &x, &y) == 2) {
+                    if ((x > 0 && x < NUM_ROWS + 1) && (y > 0 && y < NUM_COLS + 1)) {
+                       if (!set_stone(board, currnt_player, (x - 1), (y - 1))) {
+                          printf("Illegal move (already taken), try again\n");
+                          valid_input = FALSE;
+                       }
+                    } else {
+                       printf("Illegal move (off board), try again\n");
                        valid_input = FALSE;
                     }
-                 } else {
-                    printf("Illegal move (off board), try again\n");
-                    valid_input = FALSE;
                  }
-           } while (valid_input == TRUE);
+           } while (valid_input != TRUE);
            currnt_player = player_next(currnt_player);
            game_over = game_ended(game_winner(board, currnt_player), round);
            ++round;
