@@ -39,8 +39,8 @@ int max(char board[NUM_ROWS][NUM_COLS], char max_player, char min_player, int de
                  node = mini(board, min_player, max_player, depth + 1);
               }
               board[i][j] = ' ';
-              if (depth > alfa) {
-                 alfa = depth;
+              if (node > alfa) {
+                 alfa = node;
                  if (depth == round) {
                     set_stone(board, min_player, i, j);
                  }
