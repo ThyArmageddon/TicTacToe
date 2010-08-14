@@ -18,16 +18,17 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include <stdio.h>
+#include <stdbool.h>
 #include "include/libttt.h"
 #include "include/minimax.h"
 
-int set_stone(char board[NUM_ROWS][NUM_COLS], char stone, int x, int y)
+bool set_stone(char board[NUM_ROWS][NUM_COLS], char stone, int x, int y)
 {
      if (board[x][y] == ' ') {
         board[x][y] = stone;
-        return TRUE;
+        return true;
      } else {
-        return FALSE;
+        return false;
      }
 }
 
@@ -92,12 +93,12 @@ char game_winner(char board[NUM_ROWS][NUM_COLS], char currnt_player)
      return NONE;
 }
 
-int game_ended(char winner, int round)
+bool game_ended(char winner, int round)
 {
      if (winner == NONE && round < 9) {
-        return FALSE;
+        return false;
      } else {
-        return TRUE;
+        return true;
      }
 }
 

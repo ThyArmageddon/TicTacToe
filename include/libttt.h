@@ -17,6 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+#include <stdbool.h>
 
 /* Diffines both players' symbols */
 #define PLAYER1    'X'
@@ -29,15 +30,11 @@
 /* Expected return if no winner is eliminated */
 #define NONE       ' '
 
-/* Relaces boolean type */
-#define TRUE       1
-#define FALSE      0
-
 /* Set stone in an empty cell for the player */
-int set_stone(char [NUM_ROWS][NUM_COLS], char, int, int);
+bool set_stone(char [NUM_ROWS][NUM_COLS], char, int, int);
 
 /* Show the current status of the game */
-int game_ended(char,  int);
+bool game_ended(char,  int);
 
 /* Switch players after each successfull round */
 char player_next(char);

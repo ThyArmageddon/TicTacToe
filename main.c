@@ -19,6 +19,7 @@
  */
 #include <stdio.h>
 #include <unistd.h>
+#include <stdbool.h>
 #include "include/libttt.h"
 
 int main(void)
@@ -28,13 +29,13 @@ int main(void)
      int x, y;
 
      /* Syntax correctness */
-     int valid_input = TRUE;
+     bool valid_input = true;
 
      /* Rounds played sofar */
      int round = 0;
 
      /* Game is played */
-     char game_over = FALSE;
+     bool game_over = false;
 
      /* Winner is not decided at the game start */
      char winner = NONE;
@@ -59,21 +60,21 @@ int main(void)
         if (currnt_player == PLAYER1) {
            printf("Enter moves as \"<row> <col>\" (no quotes)\n");
            do {
-                 valid_input = TRUE;
+                 valid_input = true;
                  printf("%c\'s move: ", PLAYER1);
                  fflush(stdout);
                  if (scanf("%d %d", &x, &y) == 2) {
                     if ((x > 0 && x < NUM_ROWS + 1) && (y > 0 && y < NUM_COLS + 1)) {
                        if (!set_stone(board, currnt_player, (x - 1), (y - 1))) {
                           printf("Illegal move (already taken), try again\n");
-                          valid_input = FALSE;
+                          valid_input = false;
                        }
                     } else {
                        printf("Illegal move (off board), try again\n");
-                       valid_input = FALSE;
+                       valid_input = false;
                     }
                  }
-           } while (valid_input != TRUE);
+           } while (valid_input != true);
            currnt_player = player_next(currnt_player);
            game_over = game_ended(game_winner(board, currnt_player), round);
            ++round;
