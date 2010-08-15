@@ -22,6 +22,8 @@
 #include "include/libttt.h"
 #include "include/minimax.h"
 
+int xnext, ynext;
+
 bool set_stone(char board[NUM_ROWS][NUM_COLS], char stone, int x, int y)
 {
      if (board[x][y] == ' ') {
@@ -44,50 +46,80 @@ char player_next(char currnt_player)
      return next;
 }
 
-void computer_player2(char board[NUM_ROWS][NUM_COLS], char current, int round)
+void human_turn(char board[NUM_ROWS][NUM_COLS], char current, int round)
 {
-     max(board, PLAYER1, current, round);
+     int x, y;
+     bool valid_input = true;
+
+     printf("Enter moves as \"<row> <col>\" (no quotes)\n");
+     do {
+           valid_input = true;
+           printf("%c\'s move: ", PLAYER1);
+           fflush(stdout);
+           if (scanf("%d %d", &x, &y) == 2) {
+              if ((x > 0 && x < NUM_ROWS + 1) && (y > 0 && y < NUM_COLS + 1)) {
+                 if (!set_stone(board, current, (x - 1), (y - 1))) {
+                    printf("Illegal move (already taken), try again\n");
+                    valid_input = false;
+                 }
+              } else {
+                 printf("Illegal move (off board), try again\n");
+                 valid_input = false;
+              }
+           }
+     } while (valid_input != true);
 }
 
-char game_winner(char board[NUM_ROWS][NUM_COLS], char currnt_player)
+void computer_turn(char board[NUM_ROWS][NUM_COLS], char current, int round)
 {
-     /* Row */
-     for (int x = 0; x < 3; ++x) {
+     max(board, PLAYER1, current, round);
+     set_stone(board, current, xnext, ynext);
+}
+
+char game_winner(char board[NUM_ROWS][NUM_COLS])
+{
+     char p[] = {PLAYER1, PLAYER2};
+
+     for (int j = 0; j < 2; ++j) {
+
+        /* Row */
+        for (int x = 0; x < 3; ++x) {
+           for (int i = 0; i < 3; ++i) {
+              if (board[x][i] != p[j]) {
+                 break;
+              } else if (i == 2) {
+      	         return p[j];
+              }
+           }
+        }
+
+        /* Collumn */
+        for (int y = 0; y < 3; ++y) {
+           for (int i = 0; i < 3; ++i){
+              if (board[i][y] != p[j]) {
+                 break;
+              } else if (i == 2) {
+                 return p[j];
+              }
+           }
+        }
+
+        /* Diagonal */
         for (int i = 0; i < 3; ++i) {
-           if (board[x][i] != currnt_player) {
+           if (board[i][i] != p[j]) {
               break;
            } else if (i == 2) {
-      	      return currnt_player;
+              return p[j];
            }
         }
-     }
 
-     /* Collumn */
-     for (int y = 0; y < 3; ++y) {
-        for (int i = 0; i < 3; ++i){
-           if (board[i][y] != currnt_player) {
+        /* Anti-Diagonal */
+        for (int i = 0; i < 3; ++i) {
+           if (board[i][2 - i] != p[j]) {
               break;
            } else if (i == 2) {
-              return currnt_player;
+              return p[j];
            }
-        }
-     }
-
-     /* Diagonal */
-     for (int i = 0; i < 3; ++i) {
-        if (board[i][i] != currnt_player) {
-           break;
-        } else if (i == 2) {
-           return currnt_player;
-        }
-     }
-
-     /* Anti-Diagonal */
-     for (int i = 0; i < 3; ++i) {
-        if (board[i][2 - i] != currnt_player) {
-           break;
-        } else if (i == 2) {
-           return currnt_player;
         }
      }
      return NONE;

@@ -28,12 +28,13 @@ int max(char board[NUM_ROWS][NUM_COLS], char max_player, char min_player, int de
 {
      int alfa = INT_MIN;
      int node = 0;
+     extern int xnext, ynext;
      int round = depth;
 
      for (int i = 0; i < NUM_ROWS; ++i) {
         for (int j = 0; j < NUM_COLS; ++j) {
            if (set_stone(board, min_player, i, j)) {
-              if (depth >= MAX_DEPTH || game_winner(board, min_player) != NONE) {
+              if (depth >= MAX_DEPTH || game_winner(board) != NONE) {
                  node = evaluate(board, depth, max_player, min_player);
               } else {
                  node = mini(board, min_player, max_player, depth + 1);
@@ -42,7 +43,8 @@ int max(char board[NUM_ROWS][NUM_COLS], char max_player, char min_player, int de
               if (node > alfa) {
                  alfa = node;
                  if (depth == round) {
-                    set_stone(board, min_player, i, j);
+                    xnext = i;
+                    ynext = j;
                  }
               }
            }
@@ -59,7 +61,7 @@ int mini(char board[NUM_ROWS][NUM_COLS], char min_player, char max_player, int d
      for (int i = 0; i < NUM_ROWS; ++i) {
         for (int j = 0; j < NUM_COLS; ++j) {
            if (set_stone(board, max_player, i, j)) {
-              if (depth >= MAX_DEPTH || game_winner(board, max_player) != NONE) {
+              if (depth >= MAX_DEPTH || game_winner(board) != NONE) {
                  node = -evaluate(board, depth, min_player, max_player);
               } else {
                  node = max(board, max_player, min_player, depth + 1);
@@ -76,13 +78,10 @@ int mini(char board[NUM_ROWS][NUM_COLS], char min_player, char max_player, int d
 
 int evaluate(char board[NUM_ROWS][NUM_COLS], int round, char player1, char player2)
 {
-     /* human player won */
-     if (game_winner(board, PLAYER1) == player1) {
+     if (game_winner(board) == player1) {
         return -1;
-     /* computer won */
-     } else if (game_winner(board, PLAYER2) == player2) {
+     } else if (game_winner(board) == player2) {
         return 1;
-     /* draw */
      } else {
         return 0;
      }

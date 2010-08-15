@@ -40,10 +40,13 @@ bool game_ended(char,  int);
 char player_next(char);
 
 /* Search for the game's winner */
-char game_winner(char [NUM_ROWS][NUM_COLS], char);
+char game_winner(char [NUM_ROWS][NUM_COLS]);
+
+/* Human's best move */
+void human_turn(char [NUM_ROWS][NUM_COLS], char, int);
 
 /* Computer player's move */
-void computer_player2(char [NUM_ROWS][NUM_COLS], char, int);
+void computer_turn(char [NUM_ROWS][NUM_COLS], char, int);
 
 /* Simulate the game */
 void simulate(char [NUM_ROWS][NUM_COLS]);

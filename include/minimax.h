@@ -20,6 +20,6 @@
 #include "libttt.h"
 
 /* Maximal search depth */
-#define MAX_DEPTH 8
+#define MAX_DEPTH 9
 
 int max(char [NUM_ROWS][NUM_COLS], char, char, int);
