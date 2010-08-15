@@ -26,4 +26,5 @@
 
                                      NOTES
 
-   The best way to get a backtrace of the core is to run gdb
+   The best way to get a backtrace of the core is to run this application in gdb
+   invironment. For more about gdb, please check 'man gdb'.
