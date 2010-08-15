@@ -1,0 +1,29 @@
+                           TicTacToe INSTALL Document
+
+
+   Copyright (c) 2010 Dani Soufi
+
+     ----------------------------------------------------------------------
+
+                                  HOW TO BUILD
+
+   As TicTacToe is a simple CLI application, and doesn't require a ./configure
+   skript, it can be easily installed by typing 'make' in the $ROOT directory
+   of this source code.
+
+   In order to uninstall this application, it's by typing 'make clean' in the
+   same $ROOT directory mentioned above.
+
+     ----------------------------------------------------------------------
+
+                                 HOW TO GET HELP
+
+   Send Check or Money Order to... just kidding! Contact me (aka. compengi) on
+   freenode IRC network or contact me by email at danisoufi(at)gmail.com and I
+   will be glad to assist you.
+
+     ----------------------------------------------------------------------
+
+                                     NOTES
+
+   The best way to get a backtrace of the core is to run gdb
