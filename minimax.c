@@ -24,11 +24,12 @@
 int mini(char board[NUM_ROWS][NUM_COLS], char min_player, char max_player, int depth);
 int evaluate(char board[NUM_ROWS][NUM_COLS], int round, char player1, char player2);
 
+int xnext, ynext;
+
 int max(char board[NUM_ROWS][NUM_COLS], char max_player, char min_player, int depth)
 {
      int alfa = INT_MIN;
      int node = 0;
-     extern int xnext, ynext;
      int round = depth;
 
      for (int i = 0; i < NUM_ROWS; ++i) {

@@ -22,4 +22,7 @@
 /* Maximal search depth */
 #define MAX_DEPTH 9
 
+/* Computer's next best move */
+extern int xnext, ynext;
+
 int max(char [NUM_ROWS][NUM_COLS], char, char, int);
