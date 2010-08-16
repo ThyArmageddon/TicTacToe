@@ -30,11 +30,14 @@
 /* Expected return if no winner is eliminated */
 #define NONE       ' '
 
+/* Number of rounds already played */
+extern int nrounds;
+
 /* Set stone in an empty cell for the player */
 bool set_stone(char [NUM_ROWS][NUM_COLS], char, int, int);
 
 /* Show the current status of the game */
-bool game_ended(char,  int);
+bool game_ended(char);
 
 /* Switch players after each successfull round */
 char player_next(char);
@@ -43,10 +46,10 @@ char player_next(char);
 char game_winner(char [NUM_ROWS][NUM_COLS]);
 
 /* Human's best move */
-void human_turn(char [NUM_ROWS][NUM_COLS], char, int);
+void human_turn(char [NUM_ROWS][NUM_COLS], char);
 
 /* Computer player's move */
-void computer_turn(char [NUM_ROWS][NUM_COLS], char, int);
+void computer_turn(char [NUM_ROWS][NUM_COLS], char);
 
 /* Simulate the game */
 void simulate(char [NUM_ROWS][NUM_COLS]);

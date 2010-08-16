@@ -22,8 +22,6 @@
 #include "include/libttt.h"
 #include "include/minimax.h"
 
-int xnext, ynext;
-
 bool set_stone(char board[NUM_ROWS][NUM_COLS], char stone, int x, int y)
 {
      if (board[x][y] == ' ') {
@@ -46,7 +44,7 @@ char player_next(char currnt_player)
      return next;
 }
 
-void human_turn(char board[NUM_ROWS][NUM_COLS], char current, int round)
+void human_turn(char board[NUM_ROWS][NUM_COLS], char current)
 {
      int x, y;
      bool valid_input = true;
@@ -68,12 +66,14 @@ void human_turn(char board[NUM_ROWS][NUM_COLS], char current, int round)
               }
            }
      } while (valid_input != true);
+     ++nrounds;
 }
 
-void computer_turn(char board[NUM_ROWS][NUM_COLS], char current, int round)
+void computer_turn(char board[NUM_ROWS][NUM_COLS], char current)
 {
-     max(board, PLAYER1, current, round);
+     max(board, PLAYER1, current, nrounds);
      set_stone(board, current, xnext, ynext);
+     ++nrounds;
 }
 
 char game_winner(char board[NUM_ROWS][NUM_COLS])
@@ -125,9 +125,9 @@ char game_winner(char board[NUM_ROWS][NUM_COLS])
      return NONE;
 }
 
-bool game_ended(char winner, int round)
+bool game_ended(char winner)
 {
-     if (winner == NONE && round < 9) {
+     if (winner == NONE && nrounds <= 9) {
         return false;
      } else {
         return true;

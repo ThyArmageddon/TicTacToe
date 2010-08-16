@@ -21,11 +21,10 @@
 #include <stdbool.h>
 #include "include/libttt.h"
 
+int nrounds;
+
 int main(void)
 {
-
-     /* Rounds played sofar */
-     int round = 0;
 
      /* Winner is not decided at the game start */
      char winner = NONE;
@@ -43,16 +42,17 @@ int main(void)
         }
      }
 
+     nrounds = 0;
      simulate(board);
-     while (!game_ended(game_winner(board), round)) {
+     while (!game_ended(game_winner(board))) {
 
         /* The human player should choose his best move */
         if (currnt_player == PLAYER1) {
-           human_turn(board, currnt_player, ++round);
+           human_turn(board, currnt_player);
            currnt_player = player_next(currnt_player);
         } else {
            /* Compute computer's best move */
-           computer_turn(board, currnt_player, ++round);
+           computer_turn(board, currnt_player);
            currnt_player = player_next(currnt_player);
         }
         simulate(board);
@@ -65,7 +65,7 @@ int main(void)
      } else if (winner == PLAYER2) {
         printf("TicTacToe! %c wins!\n", PLAYER2);
      } else {
-        printf("Stalemate... nobody winned :(\n");
+        printf("Stalemate... nobody won :(\n");
      }
 
      return 0;

@@ -20,7 +20,7 @@
 #include "libttt.h"
 
 /* Maximal search depth */
-#define MAX_DEPTH 9
+#define MAX_DEPTH 8
 
 /* Computer's next best move */
 extern int xnext, ynext;
