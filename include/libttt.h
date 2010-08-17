@@ -53,3 +53,6 @@ void computer_turn(char [NUM_ROWS][NUM_COLS], char);
 
 /* Simulate the game */
 void simulate(char [NUM_ROWS][NUM_COLS]);
+
+/* Replay the game */
+bool restart(void);

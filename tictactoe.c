@@ -22,6 +22,8 @@
 #include "include/libttt.h"
 #include "include/minimax.h"
 
+int tolower(int c);
+
 bool set_stone(char board[NUM_ROWS][NUM_COLS], char stone, int x, int y)
 {
      if (board[x][y] == ' ') {
@@ -161,4 +163,32 @@ void simulate(char board[NUM_ROWS][NUM_COLS])
         printf("|\n");
      }
      printf(" -------------\n\n");
+}
+
+bool restart(void)
+{
+     char c;
+
+     printf("\nDo you want to play again? [Y\\N] ");
+     fflush(stdout);
+     if (scanf(" %c", &c) ==  1) {
+        printf("\n");
+        c = tolower(c);
+        if (c == 'y') {
+           return true;
+        } else {
+           return false;
+        }
+     } else {
+        return false;
+     }
+    
+}
+
+int tolower(int c)
+{
+   if (c == 'N' || c == 'Y')
+      return c + 'a' - 'A';
+   else
+      return c;
 }

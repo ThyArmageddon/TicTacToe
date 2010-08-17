@@ -35,6 +35,9 @@ int main(void)
      /* Game board */
      char board[NUM_ROWS][NUM_COLS];
 
+     /* Game is played */
+     bool ended = false;
+
      /* Initialize the game */
      for (int i = 0; i < NUM_ROWS; ++i) {
         for (int j = 0; j < NUM_COLS; ++j) {
@@ -44,8 +47,7 @@ int main(void)
 
      nrounds = 0;
      simulate(board);
-     while (!game_ended(game_winner(board))) {
-
+     while (!ended) {
         /* The human player should choose his best move */
         if (currnt_player == PLAYER1) {
            human_turn(board, currnt_player);
@@ -56,17 +58,21 @@ int main(void)
            currnt_player = player_next(currnt_player);
         }
         simulate(board);
+        winner = game_winner(board);
+        ended = game_ended(winner);
+        if (ended) {
+           /* Show the end game results in a nice way */
+           if (winner == PLAYER1) {
+              printf("TicTacToe! %c wins!\n", PLAYER1);
+           } else if (winner == PLAYER2) {
+              printf("TicTacToe! %c wins!\n", PLAYER2);
+           } else {
+              printf("Stalemate... nobody won :(\n");
+           }
+           if (restart()) {
+              main();
+           }
+        }
      }
-
-     winner = game_winner(board);
-     /* Show the end game results in a nice way */
-     if (winner == PLAYER1) {
-        printf("TicTacToe! %c wins!\n", PLAYER1);
-     } else if (winner == PLAYER2) {
-        printf("TicTacToe! %c wins!\n", PLAYER2);
-     } else {
-        printf("Stalemate... nobody won :(\n");
-     }
-
      return 0;
 }
