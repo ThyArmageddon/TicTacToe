@@ -1,0 +1,37 @@
+
+                                      Readme
+
+
+  Tictactoe or noughts and crosses is a game for two players, O and X, who take
+  turns marking the spaces in a 3x3 grid where X starts first. The player who
+  succeeds in placing three respective marks in a horizontal, vertical, or diagonal
+  row wins the game.
+
+         _________________________________________________________________
+
+                                    How To Play
+
+
+  Choose your best move by placing a stone in an empty cell. The correct cell coordinates
+  are choosen by choosing an appropriate row and an appropriate collumn numbers that are
+  distributed on the game field as follows:
+
+                               Collum
+                            1     2     3
+                       1       |     |     
+                          -----+-----+-----
+                   Row 2       |     |     
+                          -----+-----+-----
+                       3       |     |     
+
+
+  Procceed now by placing your numbers as follows: <row> <collumn> (without including the quotes)
+  so for example if you choose the cell 1,1 (the top left cell at the corner) you place them
+  in the input line as follows: 1 1
+
+  This will continue untill the all the game cells are filled, then the game winner will be diplayed.
+
+  After the game is ended, you can always replay the game by answering a simple yes/no question.
+
+
+  Goodluck!

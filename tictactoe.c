@@ -138,31 +138,28 @@ bool game_ended(char winner)
 
 void simulate(char board[NUM_ROWS][NUM_COLS])
 {
+     printf("\n");
      for (int i = 0; i < NUM_ROWS; ++i) {
         if (i > 0) {
-           printf(" |");
-           for (int k = 0; k < 3; ++k) {
+           for (int k = 0; k < NUM_COLS; ++k) {
               if (k > 0) {
                  printf("+");
               }
-              for (int l = 0; l < 3; ++l) {
+              for (int l = 0; l < NUM_ROWS + 2; ++l) {
                  printf("-");
               }
            }
-           printf("|\n");
-        } else {
-           printf(" _ %d _ %d _ %d _\n", (i + 1), (i + 2), (i + 3));
+           printf("\n");
         }
-        printf("%d|", (i + 1));
         for (int j = 0; j < NUM_COLS; ++j) {
            if (j > 0) {
               printf("|");
            }
-           printf(" %c ", board[i][j]);
+           printf("  %c  ", board[i][j]);
         }
-        printf("|\n");
+        printf("\n");
      }
-     printf(" -------------\n\n");
+     printf("\n");
 }
 
 bool restart(void)
