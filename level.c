@@ -36,7 +36,7 @@ void set_diff(void)
             if (diff == 1) {
                max_depth = 6;
             } else if (diff == 2) {
-               max_depth = 9;
+               max_depth = 8;
             } else {
                printf("Illegal choice, try again\n");
                input = false;
