@@ -1,6 +1,6 @@
 /*
  * Tictactoe: or noughts and crosses, human vs. computer game.
- * minimax.h: A header file for the computer algorithm
+ * leve.c: Adjusting the game's difficulty
  *
  * Copyright (C) 2010 Dani Soufi <danisoufi@gmail.com>
  *
@@ -17,12 +17,33 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include "libttt.h"
+#include <stdio.h>
+#include <stdbool.h>
+#include "include/minimax.h"
 
-/* Maximal search depth */
-extern int max_depth;
+void set_diff(void)
+{
+   int diff;
+   bool input = true;
 
-/* Computer's next best move */
-extern int xnext, ynext;
-
-int max(char [NUM_ROWS][NUM_COLS], char, char, int);
+   do {
+         input = true;
+         printf("Please choose your game difficulty:\n");
+         printf("(1) Easy     (2) Hard\n");
+         printf("Choose: ");
+         fflush(stdout);
+         if (scanf(" %d", &diff) == 1) {
+            if (diff == 1) {
+               max_depth = 6;
+            } else if (diff == 2) {
+               max_depth = 9;
+            } else {
+               printf("Illegal choice, try again\n");
+               input = false;
+            }
+         } else {
+            printf("Illegal choice, try again.\n");
+            input = false;
+         }
+   } while (input != true);
+}

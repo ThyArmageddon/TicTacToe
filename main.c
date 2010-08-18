@@ -46,6 +46,7 @@ int main(void)
         }
      }
 
+     set_diff();
      nrounds = 0;
      simulate(board);
      while (!ended) {

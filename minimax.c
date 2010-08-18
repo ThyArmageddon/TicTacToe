@@ -24,7 +24,7 @@
 int mini(char board[NUM_ROWS][NUM_COLS], char min_player, char max_player, int depth);
 int evaluate(char board[NUM_ROWS][NUM_COLS], char player1, char player2);
 
-int xnext, ynext;
+int xnext, ynext, max_depth;
 
 int max(char board[NUM_ROWS][NUM_COLS], char max_player, char min_player, int depth)
 {
@@ -34,7 +34,7 @@ int max(char board[NUM_ROWS][NUM_COLS], char max_player, char min_player, int de
      for (int i = 0; i < NUM_ROWS; ++i) {
         for (int j = 0; j < NUM_COLS; ++j) {
            if (set_stone(board, min_player, i, j)) {
-              if (depth >= MAX_DEPTH || game_winner(board) != NONE) {
+              if (depth >= max_depth || game_winner(board) != NONE) {
                  node = evaluate(board, max_player, min_player);
               } else {
                  node = mini(board, min_player, max_player, depth + 1);
@@ -61,7 +61,7 @@ int mini(char board[NUM_ROWS][NUM_COLS], char min_player, char max_player, int d
      for (int i = 0; i < NUM_ROWS; ++i) {
         for (int j = 0; j < NUM_COLS; ++j) {
            if (set_stone(board, max_player, i, j)) {
-              if (depth >= MAX_DEPTH || game_winner(board) != NONE) {
+              if (depth >= max_depth || game_winner(board) != NONE) {
                  node = -evaluate(board, min_player, max_player);
               } else {
                  node = max(board, max_player, min_player, depth + 1);

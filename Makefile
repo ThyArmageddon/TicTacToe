@@ -12,7 +12,7 @@
 CC = gcc -std=gnu99
 CFLAGS = -g -O2 -Wall
 LDFLAGS =
-SOURCES = main.c tictactoe.c minimax.c stats.c
+SOURCES = main.c tictactoe.c minimax.c stats.c level.c
 OBJECTS = $(SOURCES:.c=.o)
 EXECUTABLE = tictactoe
 
