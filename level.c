@@ -29,13 +29,17 @@ void set_diff(void)
    do {
          input = true;
          printf("Please choose your game difficulty:\n");
-         printf("(1) Easy     (2) Hard\n");
+         printf("(1) Easy     (2) Medium     (3) Hard     (5) Extreme\n");
          printf("Choose: ");
          fflush(stdout);
          if (scanf(" %d", &diff) == 1) {
             if (diff == 1) {
-               max_depth = 6;
+               max_depth = 5;
             } else if (diff == 2) {
+               max_depth = 6;
+            } else if (diff == 3) {
+               max_depth = 7;
+            } else if (diff == 4) {
                max_depth = 8;
             } else {
                printf("Illegal choice, try again\n");
