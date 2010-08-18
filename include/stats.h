@@ -1,6 +1,6 @@
 /*
  * Tictactoe: or noughts and crosses, human vs. computer game.
- * minimax.h: A header file for the computer algorithm
+ * stats.h: Game statistics header
  *
  * Copyright (C) 2010 Dani Soufi <danisoufi@gmail.com>
  *
@@ -18,10 +18,20 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/* Maximal search depth */
-#define MAX_DEPTH 8
+/* Number of times PLAYER1 has won */
+extern int wplayer1;
 
-/* Computer's next best move */
-extern int xnext, ynext;
+/* Number of times PLAYER2 has won */
+extern int wplayer2;
 
-int max(char [NUM_ROWS][NUM_COLS], char, char, int);
+/* Number of time the game was replayed */
+extern int nreplays;
+
+/* Number of stalemates in the game */
+extern int nstalemates;
+
+/* End round stats */
+void rover_stats(char);
+
+/* Game over stats */
+void gover_stats(void);

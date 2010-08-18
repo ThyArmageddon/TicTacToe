@@ -20,12 +20,12 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include "include/libttt.h"
+#include "include/stats.h"
 
 int nrounds;
 
 int main(void)
 {
-
      /* Winner is not decided at the game start */
      char winner = NONE;
 
@@ -37,6 +37,7 @@ int main(void)
 
      /* Game is played */
      bool ended = false;
+
 
      /* Initialize the game */
      for (int i = 0; i < NUM_ROWS; ++i) {
@@ -51,26 +52,28 @@ int main(void)
         /* The human player should choose his best move */
         if (currnt_player == PLAYER1) {
            human_turn(board, currnt_player);
-           currnt_player = player_next(currnt_player);
         } else {
            /* Compute computer's best move */
            computer_turn(board, currnt_player);
-           currnt_player = player_next(currnt_player);
         }
+        currnt_player = player_next(currnt_player);
         simulate(board);
         winner = game_winner(board);
         ended = game_ended(winner);
         if (ended) {
-           /* Show the end game results in a nice way */
+           ++nreplays;
            if (winner == PLAYER1) {
-              printf("TicTacToe! %c wins!\n", PLAYER1);
+              ++wplayer1;
            } else if (winner == PLAYER2) {
-              printf("TicTacToe! %c wins!\n", PLAYER2);
+              ++wplayer2;
            } else {
-              printf("Stalemate... nobody won :(\n");
+              ++nstalemates;
            }
+           rover_stats(winner);
            if (restart()) {
               main();
+           } else {
+              gover_stats();
            }
         }
      }
