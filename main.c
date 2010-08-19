@@ -21,58 +21,81 @@
 #include <stdbool.h>
 #include "include/libttt.h"
 #include "include/stats.h"
+#include "include/level.h"
 
 int nrounds;
+char player1, player2;
 
 int main(void)
 {
-     /* Winner is not decided at the game start */
-     char winner = NONE;
-
-     /* Player 1 always starts the game */
-     char currnt_player = PLAYER1;
-
-     /* Game board */
+     player1 = CROSS;
+     player2 = NOUGHT;
+     char winner;
+     char currnt_player = player1;
      char board[NUM_ROWS][NUM_COLS];
-
-     /* Game is played */
      bool ended = false;
 
 
-     /* Initialize the game */
-     for (int i = 0; i < NUM_ROWS; ++i) {
-        for (int j = 0; j < NUM_COLS; ++j) {
-           board[i][j] = ' ';
-        }
-     }
-
-     set_diff();
      nrounds = 0;
-     simulate(board);
      while (!ended) {
-        /* The human player should choose his best move */
-        if (currnt_player == PLAYER1) {
+
+        if (nrounds == 0) {
+           set_diff();
+           for (int i = 0; i < NUM_ROWS; ++i) {
+              for (int j = 0; j < NUM_COLS; ++j) {
+                 board[i][j] = ' ';
+              }
+           }
+           simulate(board);
+        }
+        if (currnt_player == player1) {
            human_turn(board, currnt_player);
         } else {
-           /* Compute computer's best move */
            computer_turn(board, currnt_player);
         }
+
         currnt_player = player_next(currnt_player);
         simulate(board);
         winner = game_winner(board);
         ended = game_ended(winner);
+
         if (ended) {
            ++nreplays;
-           if (winner == PLAYER1) {
+           if (winner == player1) {
               ++wplayer1;
-           } else if (winner == PLAYER2) {
+           } else if (winner == player2) {
               ++wplayer2;
            } else {
               ++nstalemates;
            }
            rover_stats(winner);
            if (restart()) {
-              main();
+              if (winner == CROSS) {
+                 if (player1 == CROSS) {
+                    currnt_player = player1;
+                 } else {
+                    currnt_player = player2;
+                 }
+              } else if (winner == NOUGHT) {
+                 if (player1 == NOUGHT) {
+                    player1 = CROSS;
+                    player2 = NOUGHT;
+                    currnt_player = player1;
+                 } else {
+                    player1 = NOUGHT;
+                    player2 = CROSS;
+                    currnt_player = player2;
+                 }
+              } else {
+                 if (player1 == CROSS) {
+                    currnt_player = player1;
+                 } else {
+                    currnt_player = player2;
+                 }
+              }
+              nrounds = 0;
+              winner = NO_MATCH;
+              ended = false;
            } else {
               gover_stats();
            }

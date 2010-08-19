@@ -20,15 +20,18 @@
 #include <stdbool.h>
 
 /* Diffines both players' symbols */
-#define PLAYER1    'X'
-#define PLAYER2    'O'
+#define CROSS     'X'
+#define NOUGHT    'O'
+
+extern char player1;
+extern char player2;
 
 /* Nummber of rows and collums in the game field */
 #define NUM_ROWS   3
 #define NUM_COLS   3
 
 /* Expected return if no winner is eliminated */
-#define NONE       ' '
+#define NO_MATCH       ' '
 
 /* Number of rounds already played */
 extern int nrounds;
@@ -57,5 +60,3 @@ void simulate(char [NUM_ROWS][NUM_COLS]);
 /* Replay the game */
 bool restart(void);
 
-/* Adjust game's difficulity */
-void set_diff(void);

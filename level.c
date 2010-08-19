@@ -1,6 +1,6 @@
 /*
  * Tictactoe: or noughts and crosses, human vs. computer game.
- * leve.c: Adjusting the game's difficulty
+ * level.c: Adjusting the game's difficulty
  *
  * Copyright (C) 2010 Dani Soufi <danisoufi@gmail.com>
  *
@@ -20,6 +20,9 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include "include/minimax.h"
+#include "include/level.h"
+
+int max_depth;
 
 void set_diff(void)
 {
@@ -29,7 +32,7 @@ void set_diff(void)
    do {
          input = true;
          printf("Please choose your game difficulty:\n");
-         printf("(1) Easy     (2) Medium     (3) Hard     (5) Extreme\n");
+         printf("(1) Easy     (2) Medium     (3) Hard     (4) Extreme\n");
          printf("Choose: ");
          fflush(stdout);
          if (scanf(" %d", &diff) == 1) {

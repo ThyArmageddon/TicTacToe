@@ -38,10 +38,10 @@ char player_next(char currnt_player)
 {
      char next;
 
-     if (currnt_player == PLAYER1) {
-        next = PLAYER2;
+     if (currnt_player == player1) {
+        next = player2;
      } else {
-        next = PLAYER1;
+        next = player1;
      }
      return next;
 }
@@ -54,7 +54,7 @@ void human_turn(char board[NUM_ROWS][NUM_COLS], char current)
      printf("Enter moves as \"<row> <col>\" (no quotes)\n");
      do {
            valid_input = true;
-           printf("%c\'s move: ", PLAYER1);
+           printf("%c\'s move: ", player1);
            fflush(stdout);
            if (scanf("%d %d", &x, &y) == 2) {
               if ((x > 0 && x < NUM_ROWS + 1) && (y > 0 && y < NUM_COLS + 1)) {
@@ -73,14 +73,15 @@ void human_turn(char board[NUM_ROWS][NUM_COLS], char current)
 
 void computer_turn(char board[NUM_ROWS][NUM_COLS], char current)
 {
-     max(board, PLAYER1, current, nrounds);
+     printf("%c\'s move:\n", player2);
+     max(board, player1, current, nrounds);
      set_stone(board, current, xnext, ynext);
      ++nrounds;
 }
 
 char game_winner(char board[NUM_ROWS][NUM_COLS])
 {
-     char p[] = {PLAYER1, PLAYER2};
+     char p[] = {player1, player2};
 
      for (int j = 0; j < 2; ++j) {
 
@@ -124,12 +125,12 @@ char game_winner(char board[NUM_ROWS][NUM_COLS])
            }
         }
      }
-     return NONE;
+     return NO_MATCH;
 }
 
 bool game_ended(char winner)
 {
-     if (winner == NONE && nrounds <= 9) {
+     if (winner == NO_MATCH && nrounds < 9) {
         return false;
      } else {
         return true;

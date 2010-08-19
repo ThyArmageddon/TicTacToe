@@ -1,6 +1,6 @@
 /*
  * Tictactoe: or noughts and crosses, human vs. computer game.
- * minimax.h: A header file for the computer algorithm
+ * level.h: The game difficulty header
  *
  * Copyright (C) 2010 Dani Soufi <danisoufi@gmail.com>
  *
@@ -17,9 +17,9 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include "libttt.h"
 
-/* Computer's next best move */
-extern int xnext, ynext;
+/* Maximal search depth */
+extern int max_depth;
 
-int max(char [NUM_ROWS][NUM_COLS], char, char, int);
+/* Adjust game's difficulity */
+void set_diff(void);
