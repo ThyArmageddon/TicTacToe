@@ -1,5 +1,5 @@
 /*
- * Tictactoe: or noughts and crosses, human vs. computer game.
+ * Tictactoe: or noughts and crosses
  * minimax.c: The minimax algorithm
  *
  * Copyright (C) 2010 Dani Soufi <danisoufi@gmail.com>

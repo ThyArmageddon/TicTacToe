@@ -1,5 +1,5 @@
 /*
- * Tictactoe: or noughts and crosses, human vs. computer game.
+ * Tictactoe: or noughts and crosses
  * main.c: Stub main program
  *
  * Copyright (C) 2010 Dani Soufi <danisoufi@gmail.com>
@@ -34,13 +34,17 @@ int main(void)
      char currnt_player = player1;
      char board[NUM_ROWS][NUM_COLS];
      bool ended = false;
+     int type;
 
 
      nrounds = 0;
+     type = gtype();
+     if (type == 2) {
+        set_diff();
+     }
      while (!ended) {
 
         if (nrounds == 0) {
-           set_diff();
            for (int i = 0; i < NUM_ROWS; ++i) {
               for (int j = 0; j < NUM_COLS; ++j) {
                  board[i][j] = ' ';
@@ -48,10 +52,18 @@ int main(void)
            }
            simulate(board);
         }
-        if (currnt_player == player1) {
-           human_turn(board, currnt_player);
+        if (type == 1) {
+           if (currnt_player == player1) {
+              human_turn(board, currnt_player);
+           } else {
+              human_turn(board, currnt_player);
+           }
         } else {
-           computer_turn(board, currnt_player);
+           if (currnt_player == player1) {
+              human_turn(board, currnt_player);
+           } else {
+              computer_turn(board, currnt_player);
+           }
         }
 
         currnt_player = player_next(currnt_player);

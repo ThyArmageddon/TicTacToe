@@ -1,5 +1,5 @@
 /*
- * Tictactoe: or noughts and crosses, human vs. computer game.
+ * Tictactoe: or noughts and crosses
  * level.c: Adjusting the game's difficulty
  *
  * Copyright (C) 2010 Dani Soufi <danisoufi@gmail.com>
@@ -45,12 +45,12 @@ void set_diff(void)
             } else if (diff == 4) {
                max_depth = 8;
             } else {
-               printf("Illegal choice, try again\n");
+               printf("Illegal choice (no match), try again\n");
                input = false;
             }
          } else {
-            printf("Illegal choice, try again.\n");
+            printf("Illegal choice (too much input), try again\n");
             input = false;
          }
-   } while (input != true);
+   } while (!input);
 }

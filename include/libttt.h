@@ -1,5 +1,5 @@
 /*
- * Tictactoe: or noughts and crosses, human vs. computer game.
+ * Tictactoe: or noughts and crosses
  * libttt.h: The game header
  *
  * Copyright (C) 2010 Dani Soufi <danisoufi@gmail.com>
@@ -59,4 +59,7 @@ void simulate(char [NUM_ROWS][NUM_COLS]);
 
 /* Replay the game */
 bool restart(void);
+
+/* Choose the game play */
+int gtype(void);
 

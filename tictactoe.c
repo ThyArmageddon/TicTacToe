@@ -1,5 +1,5 @@
 /*
- * Tictactoe: or noughts and crosses, human vs. computer game.
+ * Tictactoe: or noughts and crosses
  * tictactoe.c: Game related functions
  *
  * Copyright (C) 2010 Dani Soufi <danisoufi@gmail.com>
@@ -46,6 +46,32 @@ char player_next(char currnt_player)
      return next;
 }
 
+int gtype(void)
+{
+     int type;
+     bool input = true;
+
+     do {
+           printf("Please choose your game:\n");
+           printf("(1) 2 Player     (2) Human vs Computer\n");
+           printf("Choose: ");
+           fflush(stdout);
+           if (scanf(" %d", &type) == 1) {
+              if (type < 1 || type > 2) {
+                 printf("Illegal choice (no match), try again\n");
+                 input = false;
+              } else {
+                 input = true;
+              }
+           } else {
+              printf("Illegal choice (too much input), try again\n");
+              input = false;
+           }
+     } while (!input);
+
+     return type;
+}
+
 void human_turn(char board[NUM_ROWS][NUM_COLS], char current)
 {
      int x, y;
@@ -54,7 +80,7 @@ void human_turn(char board[NUM_ROWS][NUM_COLS], char current)
      printf("Enter moves as \"<row> <col>\" (no quotes)\n");
      do {
            valid_input = true;
-           printf("%c\'s move: ", player1);
+           printf("%c\'s move: ", current);
            fflush(stdout);
            if (scanf("%d %d", &x, &y) == 2) {
               if ((x > 0 && x < NUM_ROWS + 1) && (y > 0 && y < NUM_COLS + 1)) {
@@ -67,13 +93,13 @@ void human_turn(char board[NUM_ROWS][NUM_COLS], char current)
                  valid_input = false;
               }
            }
-     } while (valid_input != true);
+     } while (!valid_input);
      ++nrounds;
 }
 
 void computer_turn(char board[NUM_ROWS][NUM_COLS], char current)
 {
-     printf("%c\'s move:\n", player2);
+     printf("%c\'s move:\n", current);
      max(board, player1, current, nrounds);
      set_stone(board, current, xnext, ynext);
      ++nrounds;
@@ -180,7 +206,6 @@ bool restart(void)
      } else {
         return false;
      }
-    
 }
 
 int tolower(int c)
@@ -190,3 +215,4 @@ int tolower(int c)
    else
       return c;
 }
+
