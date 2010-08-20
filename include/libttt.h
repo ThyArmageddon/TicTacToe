@@ -60,6 +60,6 @@ void simulate(char [NUM_ROWS][NUM_COLS]);
 /* Replay the game */
 bool restart(void);
 
-/* Choose the game play */
-int gtype(void);
+/* Game modes */
+int gmode(void);
 

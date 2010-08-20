@@ -46,18 +46,18 @@ char player_next(char currnt_player)
      return next;
 }
 
-int gtype(void)
+int gmode(void)
 {
-     int type;
+     int mode;
      bool input = true;
 
      do {
            printf("Please choose your game:\n");
-           printf("(1) 2 Player     (2) Human vs Computer\n");
+           printf("(1) 1 player     (1) 2 player\n");
            printf("Choose: ");
            fflush(stdout);
-           if (scanf(" %d", &type) == 1) {
-              if (type < 1 || type > 2) {
+           if (scanf(" %d", &mode) == 1) {
+              if (mode < 1 || mode > 2) {
                  printf("Illegal choice (no match), try again\n");
                  input = false;
               } else {
@@ -69,7 +69,7 @@ int gtype(void)
            }
      } while (!input);
 
-     return type;
+     return mode;
 }
 
 void human_turn(char board[NUM_ROWS][NUM_COLS], char current)

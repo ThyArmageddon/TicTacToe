@@ -34,12 +34,12 @@ int main(void)
      char currnt_player = player1;
      char board[NUM_ROWS][NUM_COLS];
      bool ended = false;
-     int type;
+     int mode;
 
 
      nrounds = 0;
-     type = gtype();
-     if (type == 2) {
+     mode = gmode();
+     if (mode == 1) {
         set_diff();
      }
      while (!ended) {
@@ -52,17 +52,17 @@ int main(void)
            }
            simulate(board);
         }
-        if (type == 1) {
+        if (mode == 1) {
            if (currnt_player == player1) {
               human_turn(board, currnt_player);
            } else {
-              human_turn(board, currnt_player);
+              computer_turn(board, currnt_player);
            }
         } else {
            if (currnt_player == player1) {
               human_turn(board, currnt_player);
            } else {
-              computer_turn(board, currnt_player);
+              human_turn(board, currnt_player);
            }
         }
 
