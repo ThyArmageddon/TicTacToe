@@ -52,8 +52,8 @@ int gmode(void)
      bool input = true;
 
      do {
-           printf("Please choose your game:\n");
-           printf("(1) 1 player     (1) 2 player\n");
+           printf("Choose your game mode:\n");
+           printf("(1) Single player     (2) 2 player\n");
            printf("Choose: ");
            fflush(stdout);
            if (scanf(" %d", &mode) == 1) {

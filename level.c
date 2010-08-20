@@ -31,7 +31,7 @@ void set_diff(void)
 
    do {
          input = true;
-         printf("Please choose your game difficulty:\n");
+         printf("Choose your game difficulty:\n");
          printf("(1) Easy     (2) Medium     (3) Hard     (4) Extreme\n");
          printf("Choose: ");
          fflush(stdout);
