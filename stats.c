@@ -19,7 +19,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include <stdio.h>
-#include "include/libttt.h"
+#include "libttt.h"
 
 int wplayer1 = 0;
 int wplayer2 = 0;
@@ -38,8 +38,8 @@ void rover_stats(char winner)
         printf("%d%% win(s) and %d stalemate(s)\n", wplayer2 * 100 / nreplays, nstalemates);
      } else {
         printf("Stalemate... nobody won :(\n");
-        printf("%c has won %d game(s), ", player1, wplayer1);
-        printf("%c has won %d game(s)\n", player2, wplayer2);
+        printf("Player 1 has won %d game(s), ", wplayer1);
+        printf("Player 2 has won %d game(s)\n", wplayer2);
         printf("Stalemate count is %d time(s)\n", nstalemates);
      }
 }
@@ -47,9 +47,9 @@ void rover_stats(char winner)
 void gover_stats(void)
 {
      printf("---- Game has ended ----\n");
-     printf("%c has won %d game(s) ", player1, wplayer1);
+     printf("Player 1 has won %d game(s) ", wplayer1);
      printf("with a %d%% win(s) and %d%% loss(es)\n", wplayer1 * 100/ nreplays, wplayer2 * 100/ nreplays);
-     printf("%c has won %d game(s) ", player2, wplayer2);
+     printf("Player 2 has won %d game(s) ", wplayer2);
      printf("with a %d%% win(s) and %d%% loss(es)\n", wplayer2 * 100/ nreplays, wplayer1 * 100/ nreplays);
      printf("%d game(s) were played resulting in %d stalemate(s)\n\n", nreplays, nstalemates);
 }

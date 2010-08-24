@@ -18,9 +18,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include <limits.h>
-#include "include/libttt.h"
-#include "include/minimax.h"
-#include "include/level.h"
+#include "libttt.h"
+#include "minimax.h"
+#include "difficulty.h"
 
 int mini(char board[NUM_ROWS][NUM_COLS], char min_player, char max_player, int depth);
 int evaluate(char board[NUM_ROWS][NUM_COLS], char player1, char player2);

@@ -19,9 +19,9 @@
  */
 #include <stdio.h>
 #include <stdbool.h>
-#include "include/libttt.h"
-#include "include/stats.h"
-#include "include/level.h"
+#include "libttt.h"
+#include "stats.h"
+#include "difficulty.h"
 
 int nrounds;
 char player1, player2;

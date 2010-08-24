@@ -9,17 +9,53 @@
 # even the implied warranty of MERCHANTABILITY or FITNESS FOR A
 # PARTICULAR PURPOSE.
 
+srcdir = .
+libdir = $(srcdir)/include
+
 CC = gcc -std=gnu99
-CFLAGS = -g -O2 -Wall
-LDFLAGS =
-SOURCES = main.c tictactoe.c minimax.c stats.c level.c
-OBJECTS = $(SOURCES:.c=.o)
-EXECUTABLE = tictactoe
+CFLAGS = -g -O2 -Wall -I $(libdir)/
 
-all: $(SOURCES) $(EXECUTABLE)
+TTT_OBJS = difficulty.o main.o minimax.o stats.o tictactoe.o
+
+TTTEXEC = tictactoe
+
+$(TTTEXEC): build_msg $(TTT_OBJS) compatability
+	@echo "Linking..."
+	@echo ""
+	$(CC) $(TTT_OBJS) -o $(TTTEXEC)
+	@echo ""
+	@echo "Successfully compiled: $(TTTEXEC)"
+	@echo "Don't forget to check the README file."
+	@echo ""
+
+all: $(TTT_OBJS)
 	
-$(EXECUTABLE): $(OBJECTS) 
-	$(CC) $(LDFLAGS) $(OBJECTS) -o $@
-
 clean:
-	rm -rf *o tictactoe
+	@echo ""
+	@rm -f $(TTTEXEC)
+	@rm -rf $(TTT_OBJS)
+	@echo "TicTacToe successfully uninstalled!"
+	@echo ""
+
+build_msg:
+	@echo ""
+	@echo "Compiling TicTacToe. Grab a coffee!"
+	@echo ""
+
+compatability:
+	@echo ""
+	@echo "Finished compiling, now linking!"
+	@echo ""
+
+.SUFFIXES: .c .h .o
+
+.c.o:
+	$(CC) $(CFLAGS) -c $<
+
+# Safety hash
+difficulty.o: difficulty.c $(libdir)/minimax.h $(libdir)/difficulty.h
+main.o: main.c
+minimax.o: minimax.c $(libdir)/libttt.h $(libdir)/minimax.h $(libdir)/difficulty.h
+stats.o: stats.c $(libdir)/libttt.h
+tictactoe.o: tictactoe.c $(libdir)/libttt.h $(libdir)/minimax.h
+

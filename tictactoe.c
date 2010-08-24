@@ -19,8 +19,8 @@
  */
 #include <stdio.h>
 #include <stdbool.h>
-#include "include/libttt.h"
-#include "include/minimax.h"
+#include "libttt.h"
+#include "minimax.h"
 
 int tolower(int c);
 
@@ -56,7 +56,8 @@ int gmode(void)
            printf("(1) Single player     (2) 2 player\n");
            printf("Choose: ");
            fflush(stdout);
-           if (scanf(" %d", &mode) == 1) {
+           /* FIXME */
+           if (scanf("%d", &mode) == 1) {
               if (mode < 1 || mode > 2) {
                  printf("Illegal choice (no match), try again\n");
                  input = false;
@@ -82,6 +83,7 @@ void human_turn(char board[NUM_ROWS][NUM_COLS], char current)
            valid_input = true;
            printf("%c\'s move: ", current);
            fflush(stdout);
+           /* FIXME */
            if (scanf("%d %d", &x, &y) == 2) {
               if ((x > 0 && x < NUM_ROWS + 1) && (y > 0 && y < NUM_COLS + 1)) {
                  if (!set_stone(board, current, (x - 1), (y - 1))) {
@@ -195,6 +197,7 @@ bool restart(void)
 
      printf("\nDo you want to play again? [Y\\N] ");
      fflush(stdout);
+     /* FIXME */
      if (scanf(" %c", &c) ==  1) {
         printf("\n");
         c = tolower(c);
