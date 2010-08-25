@@ -11,8 +11,12 @@
    skript, it can be easily installed by typing 'make' in the $ROOT directory
    of this source code.
 
-   In order to uninstall this application, it's by typing 'make clean' in the
-   same $ROOT directory mentioned above.
+     ----------------------------------------------------------------------
+
+                                  HOW TO UNINSTALL
+
+   To uninstall this application, use 'make clean' in the same $ROOT directory
+   mentioned above.
 
      ----------------------------------------------------------------------
 

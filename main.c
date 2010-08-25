@@ -23,22 +23,26 @@
 #include "stats.h"
 #include "difficulty.h"
 
-int nrounds;
-char player1, player2;
 
 int main(void)
 {
-     player1 = CROSS;
-     player2 = NOUGHT;
+     char player1 = CROSS;
+     char player2 = NOUGHT;
+
      char winner;
      char currnt_player = player1;
      char board[NUM_ROWS][NUM_COLS];
      bool ended = false;
+     int nrounds = 0;
      int mode;
 
+     int wplayer1 = 0;
+     int wplayer2 = 0;
+     int nreplays = 0;
+     int nstalemates = 0;
 
-     nrounds = 0;
-     mode = gmode();
+
+     mode = select_mode();
      if (mode == 1) {
         set_diff();
      }
@@ -54,22 +58,22 @@ int main(void)
         }
         if (mode == 1) {
            if (currnt_player == player1) {
-              human_turn(board, currnt_player);
+              human_turn(board, currnt_player, &nrounds);
            } else {
-              computer_turn(board, currnt_player);
+              computer_turn(board, player1, currnt_player, &nrounds);
            }
         } else {
            if (currnt_player == player1) {
-              human_turn(board, currnt_player);
+              human_turn(board, currnt_player, &nrounds);
            } else {
-              human_turn(board, currnt_player);
+              human_turn(board, currnt_player, &nrounds);
            }
         }
 
-        currnt_player = player_next(currnt_player);
+        currnt_player = player_next(currnt_player, player1, player2);
         simulate(board);
-        winner = game_winner(board);
-        ended = game_ended(winner);
+        winner = game_winner(board, player1, player2);
+        ended = game_ended(winner, nrounds);
 
         if (ended) {
            ++nreplays;
@@ -80,7 +84,7 @@ int main(void)
            } else {
               ++nstalemates;
            }
-           rover_stats(winner);
+           rover_stats(winner, player1, player2, wplayer1, wplayer2, nreplays, nstalemates);
            if (restart()) {
               if (winner == CROSS) {
                  if (player1 == CROSS) {
@@ -109,7 +113,7 @@ int main(void)
               winner = NO_MATCH;
               ended = false;
            } else {
-              gover_stats();
+              gover_stats(wplayer1, wplayer2, nreplays, nstalemates);
            }
         }
      }

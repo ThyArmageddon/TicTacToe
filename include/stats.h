@@ -18,20 +18,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/* Number of times PLAYER1 has won */
-extern int wplayer1;
-
-/* Number of times PLAYER2 has won */
-extern int wplayer2;
-
-/* Number of time the game was replayed */
-extern int nreplays;
-
-/* Number of stalemates in the game */
-extern int nstalemates;
-
 /* End round stats */
-void rover_stats(char);
+void rover_stats(char, char, char, int, int, int, int);
 
 /* Game over stats */
-void gover_stats(void);
+void gover_stats(int, int, int, int);

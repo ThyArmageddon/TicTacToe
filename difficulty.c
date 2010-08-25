@@ -19,8 +19,6 @@
  */
 #include <stdio.h>
 #include <stdbool.h>
-#include "minimax.h"
-#include "difficulty.h"
 
 int max_depth;
 

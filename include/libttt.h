@@ -23,9 +23,6 @@
 #define CROSS     'X'
 #define NOUGHT    'O'
 
-extern char player1;
-extern char player2;
-
 /* Nummber of rows and collums in the game field */
 #define NUM_ROWS   3
 #define NUM_COLS   3
@@ -33,26 +30,23 @@ extern char player2;
 /* Expected return if no winner is eliminated */
 #define NO_MATCH       ' '
 
-/* Number of rounds already played */
-extern int nrounds;
-
 /* Set stone in an empty cell for the player */
 bool set_stone(char [NUM_ROWS][NUM_COLS], char, int, int);
 
 /* Show the current status of the game */
-bool game_ended(char);
+bool game_ended(char, int);
 
 /* Switch players after each successfull round */
-char player_next(char);
+char player_next(char, char, char);
 
 /* Search for the game's winner */
-char game_winner(char [NUM_ROWS][NUM_COLS]);
+char game_winner(char [NUM_ROWS][NUM_COLS], char, char);
 
 /* Human's best move */
-void human_turn(char [NUM_ROWS][NUM_COLS], char);
+void human_turn(char [NUM_ROWS][NUM_COLS], char, int *);
 
 /* Computer player's move */
-void computer_turn(char [NUM_ROWS][NUM_COLS], char);
+void computer_turn(char [NUM_ROWS][NUM_COLS], char, char, int *);
 
 /* Simulate the game */
 void simulate(char [NUM_ROWS][NUM_COLS]);
@@ -61,5 +55,5 @@ void simulate(char [NUM_ROWS][NUM_COLS]);
 bool restart(void);
 
 /* Game modes */
-int gmode(void);
+int select_mode(void);
 

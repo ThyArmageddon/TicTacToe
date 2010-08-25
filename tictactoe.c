@@ -19,7 +19,6 @@
  */
 #include <stdio.h>
 #include <stdbool.h>
-#include "libttt.h"
 #include "minimax.h"
 
 int tolower(int c);
@@ -34,7 +33,7 @@ bool set_stone(char board[NUM_ROWS][NUM_COLS], char stone, int x, int y)
      }
 }
 
-char player_next(char currnt_player)
+char player_next(char currnt_player, char player1, char player2)
 {
      char next;
 
@@ -46,7 +45,7 @@ char player_next(char currnt_player)
      return next;
 }
 
-int gmode(void)
+int select_mode(void)
 {
      int mode;
      bool input = true;
@@ -73,7 +72,7 @@ int gmode(void)
      return mode;
 }
 
-void human_turn(char board[NUM_ROWS][NUM_COLS], char current)
+void human_turn(char board[NUM_ROWS][NUM_COLS], char current, int *ptr)
 {
      int x, y;
      bool valid_input = true;
@@ -96,18 +95,18 @@ void human_turn(char board[NUM_ROWS][NUM_COLS], char current)
               }
            }
      } while (!valid_input);
-     ++nrounds;
+     ++*ptr;
 }
 
-void computer_turn(char board[NUM_ROWS][NUM_COLS], char current)
+void computer_turn(char board[NUM_ROWS][NUM_COLS], char player1, char current, int *ptr)
 {
      printf("%c\'s move:\n", current);
-     max(board, player1, current, nrounds);
+     max(board, player1, current, *ptr, *ptr);
      set_stone(board, current, xnext, ynext);
-     ++nrounds;
+     ++*ptr;
 }
 
-char game_winner(char board[NUM_ROWS][NUM_COLS])
+char game_winner(char board[NUM_ROWS][NUM_COLS], char player1, char player2)
 {
      char p[] = {player1, player2};
 
@@ -156,7 +155,7 @@ char game_winner(char board[NUM_ROWS][NUM_COLS])
      return NO_MATCH;
 }
 
-bool game_ended(char winner)
+bool game_ended(char winner, int nrounds)
 {
      if (winner == NO_MATCH && nrounds < 9) {
         return false;

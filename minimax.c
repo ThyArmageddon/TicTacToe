@@ -22,12 +22,12 @@
 #include "minimax.h"
 #include "difficulty.h"
 
-int mini(char board[NUM_ROWS][NUM_COLS], char min_player, char max_player, int depth);
+int mini(char board[NUM_ROWS][NUM_COLS], char min_player, char max_player, int depth, int nrounds);
 int evaluate(char board[NUM_ROWS][NUM_COLS], char player1, char player2);
 
 int xnext, ynext;
 
-int max(char board[NUM_ROWS][NUM_COLS], char max_player, char min_player, int depth)
+int max(char board[NUM_ROWS][NUM_COLS], char max_player, char min_player, int depth, int nrounds)
 {
      int alfa = INT_MIN;
      int node = 0;
@@ -35,10 +35,10 @@ int max(char board[NUM_ROWS][NUM_COLS], char max_player, char min_player, int de
      for (int i = 0; i < NUM_ROWS; ++i) {
         for (int j = 0; j < NUM_COLS; ++j) {
            if (set_stone(board, min_player, i, j)) {
-              if (depth >= max_depth || game_winner(board) != NO_MATCH) {
+              if (depth >= max_depth || game_winner(board, max_player, min_player) != NO_MATCH) {
                  node = evaluate(board, max_player, min_player);
               } else {
-                 node = mini(board, min_player, max_player, depth + 1);
+                 node = mini(board, min_player, max_player, depth + 1, nrounds);
               }
               board[i][j] = ' ';
               if (node > alfa) {
@@ -54,7 +54,7 @@ int max(char board[NUM_ROWS][NUM_COLS], char max_player, char min_player, int de
      return alfa;
 }
 
-int mini(char board[NUM_ROWS][NUM_COLS], char min_player, char max_player, int depth)
+int mini(char board[NUM_ROWS][NUM_COLS], char min_player, char max_player, int depth, int nrounds)
 {
      int alfa = INT_MAX;
      int node = 0;
@@ -62,10 +62,10 @@ int mini(char board[NUM_ROWS][NUM_COLS], char min_player, char max_player, int d
      for (int i = 0; i < NUM_ROWS; ++i) {
         for (int j = 0; j < NUM_COLS; ++j) {
            if (set_stone(board, max_player, i, j)) {
-              if (depth >= max_depth || game_winner(board) != NO_MATCH) {
+              if (depth >= max_depth || game_winner(board, min_player, max_player) != NO_MATCH) {
                  node = -evaluate(board, min_player, max_player);
               } else {
-                 node = max(board, max_player, min_player, depth + 1);
+                 node = max(board, max_player, min_player, depth + 1, nrounds);
               }
               board[i][j] = ' ';
               if (node < alfa) {
@@ -79,9 +79,11 @@ int mini(char board[NUM_ROWS][NUM_COLS], char min_player, char max_player, int d
 
 int evaluate(char board[NUM_ROWS][NUM_COLS], char player1, char player2)
 {
-     if (game_winner(board) == player1) {
+     char winner = game_winner(board, player1, player2);
+
+     if (winner == player1) {
         return -1;
-     } else if (game_winner(board) == player2) {
+     } else if (winner == player2) {
         return 1;
      } else {
         return 0;

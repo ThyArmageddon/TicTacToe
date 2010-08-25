@@ -19,14 +19,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include <stdio.h>
-#include "libttt.h"
 
-int wplayer1 = 0;
-int wplayer2 = 0;
-int nreplays = 0;
-int nstalemates = 0;
 
-void rover_stats(char winner)
+void rover_stats(char winner, int player1, int player2, int wplayer1,
+                 int wplayer2, int nreplays, int nstalemates)
 {
      if (winner == player1) {
         printf("TicTacToe! %c wins!\n", winner);
@@ -44,7 +40,7 @@ void rover_stats(char winner)
      }
 }
 
-void gover_stats(void)
+void gover_stats(int wplayer1, int wplayer2, int nreplays, int nstalemates)
 {
      printf("---- Game has ended ----\n");
      printf("Player 1 has won %d game(s) ", wplayer1);

@@ -22,4 +22,4 @@
 /* Computer's next best move */
 extern int xnext, ynext;
 
-int max(char [NUM_ROWS][NUM_COLS], char, char, int);
+int max(char [NUM_ROWS][NUM_COLS], char, char, int, int);

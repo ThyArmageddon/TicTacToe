@@ -1,6 +1,6 @@
 # Copyright (C) 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002,
 # 2003, 2004, 2005, 2006, 2007, 2008  Free Software Foundation, Inc.
-# This Makefile.in is free software; the Free Software Foundation
+# This Makefile is free software; the Free Software Foundation
 # gives unlimited permission to copy and/or distribute it,
 # with or without modifications, as long as this notice is preserved.
 
@@ -32,8 +32,9 @@ all: $(TTT_OBJS)
 	
 clean:
 	@echo ""
-	@rm -f $(TTTEXEC)
-	@rm -rf $(TTT_OBJS)
+	rm -f $(TTTEXEC)
+	rm -f $(TTT_OBJS)
+	@echo ""
 	@echo "TicTacToe successfully uninstalled!"
 	@echo ""
 
@@ -53,9 +54,9 @@ compatability:
 	$(CC) $(CFLAGS) -c $<
 
 # Safety hash
-difficulty.o: difficulty.c $(libdir)/minimax.h $(libdir)/difficulty.h
-main.o: main.c
+difficulty.o: difficulty.c
+main.o: main.c $(libdir)/libttt.h $(libdir)/stats.h $(libdir)/difficulty.h
 minimax.o: minimax.c $(libdir)/libttt.h $(libdir)/minimax.h $(libdir)/difficulty.h
-stats.o: stats.c $(libdir)/libttt.h
-tictactoe.o: tictactoe.c $(libdir)/libttt.h $(libdir)/minimax.h
+stats.o: stats.c
+tictactoe.o: tictactoe.c $(libdir)/minimax.h
 
