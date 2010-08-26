@@ -23,10 +23,10 @@
 
 int tolower(int c);
 
-bool set_stone(char board[NUM_ROWS][NUM_COLS], char stone, int x, int y)
+bool set_stone(char *br, char stone, int pos)
 {
-     if (board[x][y] == ' ') {
-        board[x][y] = stone;
+     if (*(br + pos) == ' ') {
+        *(br + pos) = stone;
         return true;
      } else {
         return false;
@@ -72,7 +72,7 @@ int select_mode(void)
      return mode;
 }
 
-void human_turn(char board[NUM_ROWS][NUM_COLS], char current, int *ptr)
+void human_turn(char *br, char current, int *round)
 {
      int x, y;
      bool valid_input = true;
@@ -82,10 +82,9 @@ void human_turn(char board[NUM_ROWS][NUM_COLS], char current, int *ptr)
            valid_input = true;
            printf("%c\'s move: ", current);
            fflush(stdout);
-           /* FIXME */
            if (scanf("%d %d", &x, &y) == 2) {
               if ((x > 0 && x < NUM_ROWS + 1) && (y > 0 && y < NUM_COLS + 1)) {
-                 if (!set_stone(board, current, (x - 1), (y - 1))) {
+                 if (!set_stone(br, current, ((NUM_ROWS * (x - 1)) + (y - 1)))) {
                     printf("Illegal move (already taken), try again\n");
                     valid_input = false;
                  }
@@ -95,61 +94,45 @@ void human_turn(char board[NUM_ROWS][NUM_COLS], char current, int *ptr)
               }
            }
      } while (!valid_input);
-     ++*ptr;
+     ++*round;
 }
 
-void computer_turn(char board[NUM_ROWS][NUM_COLS], char player1, char current, int *ptr)
+void computer_turn(char *br, char player1, char current, int *round)
 {
      printf("%c\'s move:\n", current);
-     max(board, player1, current, *ptr, *ptr);
-     set_stone(board, current, xnext, ynext);
-     ++*ptr;
+     max(br, player1, current, *round, *round);
+     set_stone(br, current, position);
+     ++*round;
 }
 
-char game_winner(char board[NUM_ROWS][NUM_COLS], char player1, char player2)
+char game_winner(char *br, char player1, char player2)
 {
      char p[] = {player1, player2};
 
-     for (int j = 0; j < 2; ++j) {
+     for (int i = 0; i < 2; ++i) {
 
         /* Row */
-        for (int x = 0; x < 3; ++x) {
-           for (int i = 0; i < 3; ++i) {
-              if (board[x][i] != p[j]) {
-                 break;
-              } else if (i == 2) {
-      	         return p[j];
-              }
-           }
+        if (((*br == p[i]) && (*(br + 1) == p[i]) && (*(br + 2) == p[i])) ||
+           ((*(br + 3) == p[i]) && (*(br + 4) == p[i]) && (*(br + 5) == p[i])) ||
+           ((*(br + 6) == p[i]) && (*(br + 7) == p[i]) && (*(br + 8) == p[i]))) {
+           return p[i];
         }
 
         /* Collumn */
-        for (int y = 0; y < 3; ++y) {
-           for (int i = 0; i < 3; ++i){
-              if (board[i][y] != p[j]) {
-                 break;
-              } else if (i == 2) {
-                 return p[j];
-              }
-           }
+        else if (((*br == p[i]) && (*(br + 3) == p[i]) && (*(br + 6) == p[i])) ||
+           ((*(br + 1) == p[i]) && (*(br + 4) == p[i]) && (*(br + 7) == p[i])) ||
+           ((*(br + 2) == p[i]) && (*(br + 5) == p[i]) && (*(br + 8) == p[i]))) {
+           return p[i];
         }
 
         /* Diagonal */
-        for (int i = 0; i < 3; ++i) {
-           if (board[i][i] != p[j]) {
-              break;
-           } else if (i == 2) {
-              return p[j];
-           }
+        else if ((*br == p[i]) && (*(br + 4) == p[i]) && (*(br + 8) == p[i])) {
+           return p[i];
         }
 
         /* Anti-Diagonal */
-        for (int i = 0; i < 3; ++i) {
-           if (board[i][2 - i] != p[j]) {
-              break;
-           } else if (i == 2) {
-              return p[j];
-           }
+        else if ((*(br + 2) == p[i]) && (*(br + 4) == p[i]) && (*(br + 6) == p[i])) {
+           return p[i];
         }
      }
      return NO_MATCH;
@@ -164,7 +147,7 @@ bool game_ended(char winner, int nrounds)
      }
 }
 
-void simulate(char board[NUM_ROWS][NUM_COLS])
+void simulate(char *p)
 {
      printf("\n");
      for (int i = 0; i < NUM_ROWS; ++i) {
@@ -183,7 +166,7 @@ void simulate(char board[NUM_ROWS][NUM_COLS])
            if (j > 0) {
               printf("|");
            }
-           printf("  %c  ", board[i][j]);
+           printf("  %c  ", *(p++));
         }
         printf("\n");
      }

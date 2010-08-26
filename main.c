@@ -31,7 +31,8 @@ int main(void)
 
      char winner;
      char currnt_player = player1;
-     char board[NUM_ROWS][NUM_COLS];
+     char board[NUM_ALL];
+     char *br;
      bool ended = false;
      int nrounds = 0;
      int mode;
@@ -49,30 +50,29 @@ int main(void)
      while (!ended) {
 
         if (nrounds == 0) {
-           for (int i = 0; i < NUM_ROWS; ++i) {
-              for (int j = 0; j < NUM_COLS; ++j) {
-                 board[i][j] = ' ';
-              }
-           }
-           simulate(board);
+           for (int i = 0; i < NUM_ALL; ++i) {
+              board[i] = ' ';
+            }
+            br = &board[0];
+            simulate(br);
         }
         if (mode == 1) {
            if (currnt_player == player1) {
-              human_turn(board, currnt_player, &nrounds);
+              human_turn(br, currnt_player, &nrounds);
            } else {
-              computer_turn(board, player1, currnt_player, &nrounds);
+              computer_turn(br, player1, currnt_player, &nrounds);
            }
         } else {
            if (currnt_player == player1) {
-              human_turn(board, currnt_player, &nrounds);
+              human_turn(br, currnt_player, &nrounds);
            } else {
-              human_turn(board, currnt_player, &nrounds);
+              human_turn(br, currnt_player, &nrounds);
            }
         }
 
         currnt_player = player_next(currnt_player, player1, player2);
-        simulate(board);
-        winner = game_winner(board, player1, player2);
+        simulate(br);
+        winner = game_winner(br, player1, player2);
         ended = game_ended(winner, nrounds);
 
         if (ended) {
@@ -84,7 +84,8 @@ int main(void)
            } else {
               ++nstalemates;
            }
-           rover_stats(winner, player1, player2, wplayer1, wplayer2, nreplays, nstalemates);
+           rover_stats(winner, player1, player2, wplayer1,
+                       wplayer2, nreplays, nstalemates);
            if (restart()) {
               if (winner == CROSS) {
                  if (player1 == CROSS) {

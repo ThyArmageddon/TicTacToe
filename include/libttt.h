@@ -24,14 +24,15 @@
 #define NOUGHT    'O'
 
 /* Nummber of rows and collums in the game field */
-#define NUM_ROWS   3
-#define NUM_COLS   3
+#define NUM_ALL      9
+#define NUM_ROWS     3
+#define NUM_COLS     3
 
 /* Expected return if no winner is eliminated */
 #define NO_MATCH       ' '
 
 /* Set stone in an empty cell for the player */
-bool set_stone(char [NUM_ROWS][NUM_COLS], char, int, int);
+bool set_stone(char *, char, int);
 
 /* Show the current status of the game */
 bool game_ended(char, int);
@@ -40,16 +41,16 @@ bool game_ended(char, int);
 char player_next(char, char, char);
 
 /* Search for the game's winner */
-char game_winner(char [NUM_ROWS][NUM_COLS], char, char);
+char game_winner(char *, char, char);
 
 /* Human's best move */
-void human_turn(char [NUM_ROWS][NUM_COLS], char, int *);
+void human_turn(char *, char, int *);
 
 /* Computer player's move */
-void computer_turn(char [NUM_ROWS][NUM_COLS], char, char, int *);
+void computer_turn(char *, char, char, int *);
 
 /* Simulate the game */
-void simulate(char [NUM_ROWS][NUM_COLS]);
+void simulate(char *);
 
 /* Replay the game */
 bool restart(void);

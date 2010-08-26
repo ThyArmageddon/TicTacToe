@@ -20,6 +20,6 @@
 #include "libttt.h"
 
 /* Computer's next best move */
-extern int xnext, ynext;
+extern int position;
 
-int max(char [NUM_ROWS][NUM_COLS], char, char, int, int);
+int max(char *, char, char, int, int);

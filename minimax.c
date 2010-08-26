@@ -22,31 +22,28 @@
 #include "minimax.h"
 #include "difficulty.h"
 
-int mini(char board[NUM_ROWS][NUM_COLS], char min_player, char max_player, int depth, int nrounds);
-int evaluate(char board[NUM_ROWS][NUM_COLS], char player1, char player2);
+int mini(char *, char, char, int, int);
+int evaluate(char *, char, char);
 
-int xnext, ynext;
+int position;
 
-int max(char board[NUM_ROWS][NUM_COLS], char max_player, char min_player, int depth, int nrounds)
+int max(char *br, char max_player, char min_player, int depth, int nrounds)
 {
      int alfa = INT_MIN;
      int node = 0;
 
-     for (int i = 0; i < NUM_ROWS; ++i) {
-        for (int j = 0; j < NUM_COLS; ++j) {
-           if (set_stone(board, min_player, i, j)) {
-              if (depth >= max_depth || game_winner(board, max_player, min_player) != NO_MATCH) {
-                 node = evaluate(board, max_player, min_player);
-              } else {
-                 node = mini(board, min_player, max_player, depth + 1, nrounds);
-              }
-              board[i][j] = ' ';
-              if (node > alfa) {
-                 alfa = node;
-                 if (depth == nrounds) {
-                    xnext = i;
-                    ynext = j;
-                 }
+     for (int i = 0; i < NUM_ALL; ++i) {
+        if (set_stone(br, min_player, i)) {
+           if (depth >= max_depth || game_winner(br, max_player, min_player) != NO_MATCH) {
+              node = evaluate(br, max_player, min_player);
+           } else {
+              node = mini(br, min_player, max_player, depth + 1, nrounds);
+           }
+           *(br + i) = ' ';
+           if (node > alfa) {
+              alfa = node;
+              if (depth == nrounds) {
+                    position = i;
               }
            }
         }
@@ -54,32 +51,30 @@ int max(char board[NUM_ROWS][NUM_COLS], char max_player, char min_player, int de
      return alfa;
 }
 
-int mini(char board[NUM_ROWS][NUM_COLS], char min_player, char max_player, int depth, int nrounds)
+int mini(char *br, char min_player, char max_player, int depth, int nrounds)
 {
      int alfa = INT_MAX;
      int node = 0;
 
-     for (int i = 0; i < NUM_ROWS; ++i) {
-        for (int j = 0; j < NUM_COLS; ++j) {
-           if (set_stone(board, max_player, i, j)) {
-              if (depth >= max_depth || game_winner(board, min_player, max_player) != NO_MATCH) {
-                 node = -evaluate(board, min_player, max_player);
-              } else {
-                 node = max(board, max_player, min_player, depth + 1, nrounds);
-              }
-              board[i][j] = ' ';
-              if (node < alfa) {
-                 alfa = node;
-              }
+     for (int i = 0; i < NUM_ALL; ++i) {
+        if (set_stone(br, max_player, i)) {
+           if (depth >= max_depth || game_winner(br, min_player, max_player) != NO_MATCH) {
+              node = -evaluate(br, min_player, max_player);
+           } else {
+              node = max(br, max_player, min_player, depth + 1, nrounds);
+           }
+           *(br + i) = ' ';
+           if (node < alfa) {
+              alfa = node;
            }
         }
      }
      return alfa;
 }
 
-int evaluate(char board[NUM_ROWS][NUM_COLS], char player1, char player2)
+int evaluate(char *br, char player1, char player2)
 {
-     char winner = game_winner(board, player1, player2);
+     char winner = game_winner(br, player1, player2);
 
      if (winner == player1) {
         return -1;
