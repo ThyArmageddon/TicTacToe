@@ -43,7 +43,7 @@ int max(char *br, char max_player, char min_player, int depth, int nrounds)
            if (node > alfa) {
               alfa = node;
               if (depth == nrounds) {
-                    position = i;
+                 position = i;
               }
            }
         }
