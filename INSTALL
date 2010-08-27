@@ -7,9 +7,21 @@
 
                                   HOW TO BUILD
 
-   As TicTacToe is a simple CLI application, and doesn't require a ./configure
-   skript, it can be easily installed by typing 'make' in the $ROOT directory
-   of this source code.
+   TicTacToe uses GNU autoconfigure scripts to make this easier.
+
+     1. Type './configure' from the TicTacToe directory. The configure script
+        will determine how your system is set up and figure out how to
+        correctly compile TicTacToe. In TicTacToe, the paths are now handled
+        with the --prefix option to configure, not in config.h.
+
+     2. Type 'make' from the TicTacToe directory to build the source.
+
+     3. TicTacToe must be installed in a directory somewhere. This is
+        accomplished by entering 'make install' command. This will install
+        TicTacToe in the specified directory.
+
+     4. Smile, and if you haven't already read the README file in its
+        entirety, go take a long walk off a short pier.
 
      ----------------------------------------------------------------------
 
