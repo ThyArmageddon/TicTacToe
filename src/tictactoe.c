@@ -18,10 +18,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include <stdio.h>
+#include <ctype.h>
 #include <stdbool.h>
 #include "minimax.h"
 
-int tolower(int c);
 
 bool set_stone(char *br, char stone, int pos)
 {
@@ -191,13 +191,5 @@ bool restart(void)
      } else {
         return false;
      }
-}
-
-int tolower(int c)
-{
-   if (c == 'N' || c == 'Y')
-      return c + 'a' - 'A';
-   else
-      return c;
 }
 
