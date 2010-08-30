@@ -19,7 +19,7 @@
  */
 
 /* End round stats */
-void rover_stats(char, char, char, int, int, int, int);
+void rover_stats(char, char, char, int, int, int, int, int);
 
 /* Game over stats */
-void gover_stats(int, int, int, int);
+void gover_stats(int, int, int, int, int);

@@ -22,30 +22,52 @@
 
 
 void rover_stats(char winner, int player1, int player2, int wplayer1,
-                 int wplayer2, int nreplays, int nstalemates)
+                 int wplayer2, int nreplays, int nstalemates, int mode)
 {
+     int p1stats, p2stats;
+
+     p1stats = wplayer1 * 100 / nreplays;
+     p2stats = wplayer2 * 100 / nreplays;
      if (winner == player1) {
         printf("TicTacToe! %c wins!\n", winner);
         printf("Current winner has won %d game(s) out of %d, ", wplayer1, nreplays);
-        printf("%d%% win(s) and %d stalemate(s)\n", wplayer1 * 100 / nreplays, nstalemates);
+        printf("%d%% win(s) including %d stalemate(s)\n", p1stats, nstalemates);
      } else if (winner == player2) {
         printf("TicTacToe! %c wins!\n", winner);
         printf("Current winner has won %d game(s) out of %d, ", wplayer2, nreplays);
-        printf("%d%% win(s) and %d stalemate(s)\n", wplayer2 * 100 / nreplays, nstalemates);
+        printf("%d%% win(s) including %d stalemate(s)\n", p2stats, nstalemates);
      } else {
         printf("Stalemate... nobody won :(\n");
-        printf("Player 1 has won %d game(s), ", wplayer1);
-        printf("Player 2 has won %d game(s)\n", wplayer2);
+        if (mode == 1) {
+           printf("Human player has won %d game(s), ", wplayer1);
+           printf("Computer player has won %d game(s)\n", wplayer2);
+        } else {
+           printf("Player 1 has won %d game(s), ", wplayer1);
+           printf("Player 2 has won %d game(s)\n", wplayer2);
+        }
         printf("Stalemate count is %d time(s)\n", nstalemates);
      }
 }
 
-void gover_stats(int wplayer1, int wplayer2, int nreplays, int nstalemates)
+void gover_stats(int wplayer1, int wplayer2, int nreplays,
+                 int nstalemates, int mode)
 {
+     int p1stats, p2stats;
+
+     p1stats = wplayer1 * 100/ nreplays;
+     p2stats = wplayer2 * 100/ nreplays;
      printf("---- Game has ended ----\n");
-     printf("Player 1 has won %d game(s) ", wplayer1);
-     printf("with a %d%% win(s) and %d%% loss(es)\n", wplayer1 * 100/ nreplays, wplayer2 * 100/ nreplays);
-     printf("Player 2 has won %d game(s) ", wplayer2);
-     printf("with a %d%% win(s) and %d%% loss(es)\n", wplayer2 * 100/ nreplays, wplayer1 * 100/ nreplays);
-     printf("%d game(s) were played resulting in %d stalemate(s)\n\n", nreplays, nstalemates);
+     if (mode == 1) {
+        printf("Human player has won %d game(s) ", wplayer1);
+        printf("with a %d%% win(s) and %d%% loss(es)\n", p1stats, p2stats);
+        printf("Computer player has won %d game(s) ", wplayer2);
+        printf("with a %d%% win(s) and %d%% loss(es)\n", p2stats, p1stats);
+     } else {   
+        printf("Player 1 has won %d game(s) ", wplayer1);
+        printf("with a %d%% win(s) and %d%% loss(es)\n", p1stats, p2stats);
+        printf("Player 2 has won %d game(s) ", wplayer2);
+        printf("with a %d%% win(s) and %d%% loss(es)\n", p2stats, p1stats);
+     }
+     printf("%d game(s) were played resulting in ", nreplays);
+     printf("%d stalemate(s)\n\n", nstalemates);
 }

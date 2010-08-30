@@ -85,7 +85,7 @@ int main(void)
               ++nstalemates;
            }
            rover_stats(winner, player1, player2, wplayer1,
-                       wplayer2, nreplays, nstalemates);
+                       wplayer2, nreplays, nstalemates, mode);
            if (restart()) {
               if (winner == CROSS) {
                  if (player1 == CROSS) {
@@ -114,7 +114,7 @@ int main(void)
               winner = NO_MATCH;
               ended = false;
            } else {
-              gover_stats(wplayer1, wplayer2, nreplays, nstalemates);
+              gover_stats(wplayer1, wplayer2, nreplays, nstalemates, mode);
            }
         }
      }
