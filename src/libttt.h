@@ -58,3 +58,5 @@ bool restart(void);
 /* Game modes */
 int select_mode(void);
 
+/* Announce the next player on the next round */
+void nround_announce(char, char, char, char);

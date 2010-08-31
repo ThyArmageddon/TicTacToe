@@ -51,6 +51,7 @@ int select_mode(void)
      bool input = true;
 
      do {
+           printf("---- Welcome to TicTacToe ----\n");
            printf("Choose your game mode:\n");
            printf("(1) Single player     (2) 2 player\n");
            printf("Choose: ");
@@ -193,3 +194,15 @@ bool restart(void)
      }
 }
 
+void nround_announce(char winner, char player1, char player2, char next_player)
+{
+     printf("\n---- New Round ----\n");
+     if (winner == player1) {
+        printf("%c switches stones with %c\n", winner, next_player);
+     } else if (winner == player2) {
+        printf("%c switches stones with %c\n", winner, next_player);
+     } else {
+        printf("Player stones remain unchanged.\n");
+     }
+     printf("%c goes first\n", next_player);
+}

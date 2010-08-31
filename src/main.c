@@ -110,6 +110,7 @@ int main(void)
                     currnt_player = player2;
                  }
               }
+              nround_announce(winner, player1, player2, currnt_player);
               nrounds = 0;
               winner = NO_MATCH;
               ended = false;
