@@ -197,12 +197,15 @@ bool restart(void)
 void nround_announce(char winner, char player1, char player2, char next_player)
 {
      printf("\n---- New Round ----\n");
-     if (winner == player1) {
-        printf("%c switches stones with %c\n", winner, next_player);
-     } else if (winner == player2) {
-        printf("%c switches stones with %c\n", winner, next_player);
+     if (winner == NOUGHT) {
+        if (winner == player1) {
+           printf("%c switches stones with %c\n", winner, next_player);
+        } else if (winner == player2) {
+           printf("%c switches stones with %c\n", winner, next_player);
+        } else {
+           printf("Round stones remain unchanged.\n");
+        }
      } else {
-        printf("Player stones remain unchanged.\n");
+        printf("Round stones remain unchanged.\n");
      }
-     printf("%c goes first\n", next_player);
 }
