@@ -27,8 +27,8 @@
 
                                   HOW TO UNINSTALL
 
-   To uninstall this application, use 'make clean' in the same $ROOT directory
-   mentioned above.
+   To uninstall this application, use 'make uninstall' in the same $ROOT
+   directory mentioned above.
 
      ----------------------------------------------------------------------
 
