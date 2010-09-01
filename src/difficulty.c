@@ -29,17 +29,17 @@ int set_diff(void)
          printf("(1) Easy     (2) Medium     (3) Hard     (4) Extreme\n");
          printf("Choose: ");
          if (fgets(buff, sizeof(buff), stdin) != NULL) {
-            switch(sscanf(buff, NULL, 10)) {
-            case 1:
-               return 5;
-            case 2:
-               return 6;
-            case 3:
-               return 7;
-            case 4:
-               return 8;
-            default:
-               printf("Invalid choice (no match), try again\n");
+            switch(strtol(buff, NULL, 10)) {
+               case 1:
+                  return 5;
+               case 2:
+                  return 6;
+               case 3:
+                  return 7;
+               case 4:
+                  return 8;
+               default:
+                  printf("Invalid choice (no match), try again\n");
             }
          }
    } while (1);

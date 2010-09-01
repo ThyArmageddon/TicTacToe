@@ -51,7 +51,7 @@ int select_mode(void)
 {
      char buff[5];
 
-     printf("---- Welcome to TicTacToe ----\n\n");
+     printf("\n\n---- Welcome to TicTacToe ----\n");
      do {
            printf("\nChoose your game mode:\n");
            printf("(1) Single player     (2) 2 player\n");
@@ -61,7 +61,7 @@ int select_mode(void)
                  case 1:
                     return 1;
                  case 2:
-                    return = 2;
+                    return 2;
                  default:
                     printf("Invalid choice (no match), try again\n");
               }
