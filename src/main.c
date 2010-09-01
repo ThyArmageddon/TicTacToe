@@ -23,6 +23,7 @@
 #include "stats.h"
 #include "difficulty.h"
 
+int max_depth;
 
 int main(void)
 {
@@ -45,7 +46,7 @@ int main(void)
 
      mode = select_mode();
      if (mode == 1) {
-        set_diff();
+        max_depth = set_diff();
      }
      while (!ended) {
 

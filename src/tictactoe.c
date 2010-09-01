@@ -49,55 +49,49 @@ char player_next(char currnt_player, char player1, char player2)
 
 int select_mode(void)
 {
-     char buf[5];
-     bool input;
-     int mode = 0;
+     char buff[5];
 
      printf("---- Welcome to TicTacToe ----\n\n");
      do {
-           input = true;
            printf("\nChoose your game mode:\n");
            printf("(1) Single player     (2) 2 player\n");
            printf("Choose: ");
-           if (fgets(buf, sizeof(buf), stdin) != NULL) {
-              switch (strtol(buf, NULL, 10)) {
+           if (fgets(buff, sizeof(buff), stdin) != NULL) {
+              switch (strtol(buff, NULL, 10)) {
                  case 1:
-                    mode = 1;
-                    break;
+                    return 1;
                  case 2:
-                    mode = 2;
-                    break;
+                    return = 2;
                  default:
                     printf("Invalid choice (no match), try again\n");
-                    input = false;
               }
            }
-     } while (!input);
-     return mode;
+     } while (1);
 }
 
 void human_turn(char *br, char current, int *round)
 {
+     char buff[5];
      int x, y;
-     bool valid_input = true;
+     bool input;
 
      printf("Enter moves as \"<row> <col>\" (no quotes)\n");
      do {
-           valid_input = true;
+           input = true;
            printf("%c\'s move: ", current);
-           fflush(stdout);
-           if (scanf("%d %d", &x, &y) == 2) {
+           if (fgets(buff, sizeof(buff), stdin) != NULL) {
+              sscanf(buff, "%i%i", &x, &y);
               if ((x > 0 && x < NUM_ROWS + 1) && (y > 0 && y < NUM_COLS + 1)) {
                  if (!set_stone(br, current, ((NUM_ROWS * (x - 1)) + (y - 1)))) {
                     printf("Illegal move (already taken), try again\n");
-                    valid_input = false;
+                    input = false;
                  }
               } else {
                  printf("Illegal move (off board), try again\n");
-                 valid_input = false;
+                 input = false;
               }
            }
-     } while (!valid_input);
+     } while (!input);
      ++*round;
 }
 

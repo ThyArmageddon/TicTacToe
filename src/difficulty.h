@@ -22,4 +22,4 @@
 extern int max_depth;
 
 /* Adjust game's difficulity */
-void set_diff(void);
+int set_diff(void);

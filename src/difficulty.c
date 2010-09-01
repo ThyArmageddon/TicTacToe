@@ -18,44 +18,29 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include <stdio.h>
-#include <stdbool.h>
+#include <stdlib.h>
 
-int max_depth;
-
-void set_diff(void)
+int set_diff(void)
 {
-   int diff;
-   bool input = true;
+   char buff[5];
 
    do {
-         input = true;
          printf("Choose your game difficulty:\n");
          printf("(1) Easy     (2) Medium     (3) Hard     (4) Extreme\n");
          printf("Choose: ");
-         fflush(stdout);
-         /* FIXME */
-         if (scanf(" %d", &diff) == 1) {
-            switch(diff) {
+         if (fgets(buff, sizeof(buff), stdin) != NULL) {
+            switch(sscanf(buff, NULL, 10)) {
             case 1:
-               max_depth = 5;
-               break;
+               return 5;
             case 2:
-               max_depth = 6;
-               break;
+               return 6;
             case 3:
-               max_depth = 7;
-               break;
+               return 7;
             case 4:
-               max_depth = 8;
-               break;
+               return 8;
             default:
                printf("Invalid choice (no match), try again\n");
-               input = false;
-               break;
             }
-         } else {
-            printf("Invalid (too much input), try again\n");
-            input = false;
          }
-   } while (!input);
+   } while (1);
 }
