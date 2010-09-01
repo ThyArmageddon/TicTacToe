@@ -180,9 +180,9 @@ bool restart(void)
            if (fgets(buff, sizeof(buff), stdin) != NULL) {
               sscanf(buff, "%c", &c);
               switch (c) {
-                 case 'y': case: 'Y':
+                 case 'y': case 'Y':
                     return true;
-                 case 'n': case: 'N':
+                 case 'n': case 'N':
                     return false;
               }
            }
