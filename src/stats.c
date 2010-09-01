@@ -56,7 +56,7 @@ void gover_stats(int wplayer1, int wplayer2, int nreplays,
 
      p1stats = wplayer1 * 100/ nreplays;
      p2stats = wplayer2 * 100/ nreplays;
-     printf("---- Game has ended ----\n");
+     printf("\n---- Game has ended ----\n");
      if (mode == 1) {
         printf("Human player has won %d game(s) ", wplayer1);
         printf("with a %d%% win(s) and %d%% loss(es)\n", p1stats, p2stats);

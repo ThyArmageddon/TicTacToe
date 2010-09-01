@@ -173,22 +173,20 @@ void simulate(char *p)
 
 bool restart(void)
 {
-     char c;
+     char c, buff[5];
 
-     printf("\nDo you want to play again? [Y\\N] ");
-     fflush(stdout);
-     /* FIXME */
-     if (scanf(" %c", &c) ==  1) {
-        printf("\n");
-        c = tolower(c);
-        if (c == 'y') {
-           return true;
-        } else {
-           return false;
-        }
-     } else {
-        return false;
-     }
+     do {
+           printf("\nDo you want to play again? [Y\\n] ");
+           if (fgets(buff, sizeof(buff), stdin) != NULL) {
+              sscanf(buff, "%c", &c);
+              switch (c) {
+                 case 'y': case: 'Y':
+                    return true;
+                 case 'n': case: 'N':
+                    return false;
+              }
+           }
+     } while (1);
 }
 
 void nround_announce(char winner, char player1, char player2, char next_player)
