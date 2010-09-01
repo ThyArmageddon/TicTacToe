@@ -19,6 +19,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include <stdio.h>
+#include <stdlib.h>
 #include <ctype.h>
 #include <stdbool.h>
 #include "minimax.h"
@@ -48,29 +49,30 @@ char player_next(char currnt_player, char player1, char player2)
 
 int select_mode(void)
 {
-     int mode;
-     bool input = true;
+     char buf[5];
+     bool input;
+     int mode = 0;
 
+     printf("---- Welcome to TicTacToe ----\n\n");
      do {
-           printf("---- Welcome to TicTacToe ----\n");
-           printf("Choose your game mode:\n");
+           input = true;
+           printf("\nChoose your game mode:\n");
            printf("(1) Single player     (2) 2 player\n");
            printf("Choose: ");
-           fflush(stdout);
-           /* FIXME */
-           if (scanf("%d", &mode) == 1) {
-              if (mode < 1 || mode > 2) {
-                 printf("Illegal choice (no match), try again\n");
-                 input = false;
-              } else {
-                 input = true;
+           if (fgets(buf, sizeof(buf), stdin) != NULL) {
+              switch (strtol(buf, NULL, 10)) {
+                 case 1:
+                    mode = 1;
+                    break;
+                 case 2:
+                    mode = 2;
+                    break;
+                 default:
+                    printf("Invalid choice (no match), try again\n");
+                    input = false;
               }
-           } else {
-              printf("Illegal choice (too much input), try again\n");
-              input = false;
            }
      } while (!input);
-
      return mode;
 }
 
